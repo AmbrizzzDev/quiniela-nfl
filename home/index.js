@@ -103,7 +103,7 @@ function gameItem(g){
   const pick = document.createElement("div"); 
   pick.className = "pick";
 
-  // Botones
+
   const bA = document.createElement("button"); 
   bA.className="chip"; 
   bA.textContent = g.away; 
@@ -144,7 +144,6 @@ function gameItem(g){
     bH.setAttribute("aria-pressed", side==="home");
   }
 
-  // 👈 OJO: se añaden en orden away, tie, home (Empate queda al centro)
   pick.append(bA, bT, bH);
   wrap.append(teams, pick);
   return wrap;
@@ -159,7 +158,6 @@ $("#startBtn").addEventListener("click", async ()=>{
   inicial = inicial.toUpperCase();
   fullName = `${nombre} ${inicial}.`;
 
-  // Intenta cargar desde la nube
   picks.clear();
   try {
     const cloud = await loadFromCloud(fullName, CURRENT_WEEK);
@@ -234,7 +232,6 @@ $("#save").addEventListener("click", ()=>{
 })
 };
 
-// Guarda en la nube (sobrescribe por nombre + semana)
 saveToCloud(lastSavedEntry).catch(console.error);
 syncToSheet(lastSavedEntry);
 
@@ -242,22 +239,19 @@ openSheet();
 playSaveAnim();
 });
 
-// Normaliza el nombre para usarlo como id de documento
 const normName = s => String(s || '').trim().toUpperCase();
 
-// Guarda en Firestore (upsert por nombre + semana)
 async function saveToCloud(entry){
-  const docId = normName(entry.fullName); // <-- clave por persona
+  const docId = normName(entry.fullName);
   const ref = db.doc(`events/${EVENT_ID}/weeks/${entry.week}/picks/${docId}`);
   await ref.set({
     fullName: entry.fullName,
     week: entry.week,
-    picks: entry.picks, // [{id, winner}]
+    picks: entry.picks, 
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   }, { merge: true });
 }
 
-// Lee de Firestore para ese nombre + semana
 async function loadFromCloud(fullName, week){
   const docId = normName(fullName);
   const ref = db.doc(`events/${EVENT_ID}/weeks/${week}/picks/${docId}`);
@@ -268,9 +262,7 @@ async function loadFromCloud(fullName, week){
 function playSaveAnim(){
   const svg = document.querySelector('.check');
   if(!svg) return;
-  // Reset animation by toggling class
   svg.classList.remove('play');
-  // Force reflow
   void svg.offsetWidth;
   svg.classList.add('play');
 }
@@ -285,29 +277,27 @@ $("#addAnother").addEventListener("click", ()=>{
   closeSheet();
 });
 
-$("#editPicks").addEventListener("click", ()=>{ closeSheet(); /* seguimos en step2 */ });
+$("#editPicks").addEventListener("click", ()=>{ closeSheet();});
 
 ["#nombre","#inicial"].forEach(sel=>{
   $(sel).addEventListener("keydown", e=>{ if(e.key==="Enter") $("#startBtn").click(); });
 });
 
-// Config
+
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwcJvKSP1o00zGGI9-HBDuyoF8y_ev0QSFnE8j_YNV5XVILfkPzp-fPaB_4fwhceR9N/exec';
 const SHARED_SECRET = 'quiniela-picks';
 
-// En tu handler de Guardar, ya tienes lastSavedEntry con { fullName, week, picks: [...] }
 async function syncToSheet(entry){
-  // Evitamos preflight: no ponemos headers personalizados y usamos no-cors
   const payload = {
     secret: SHARED_SECRET,
     fullName: entry.fullName,
-    week: entry.week,           // si no usas semanas, pon String(CURRENT_WEEK)
-    picks: entry.picks          // [{id, winner}]
+    week: entry.week,           
+    picks: entry.picks          
   };
   try {
     await fetch(WEB_APP_URL, {
       method: 'POST',
-      mode: 'no-cors',          // respuesta opaca, pero el POST sí se envía
+      mode: 'no-cors',        
       body: JSON.stringify(payload)
     });
   } catch (e) {
