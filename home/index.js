@@ -40,7 +40,7 @@ const TEAM_LOGOS = {
   "Browns":"https://a.espncdn.com/i/teamlogos/nfl/500/cle.png",
   "Lions":"https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
   "Panthers":"https://a.espncdn.com/i/teamlogos/nfl/500/car.png",
-  "Chargers":"https://a.espncdn.com/i/teamlogos/nfl/500/la.png",
+  "Chargers":"https://a.espncdn.com/i/teamlogos/nfl/500/lac.png",
   "Buccaneers":"https://a.espncdn.com/i/teamlogos/nfl/500/tb.png",
   "Saints":"https://a.espncdn.com/i/teamlogos/nfl/500/no.png",
   "Vikings":"https://a.espncdn.com/i/teamlogos/nfl/500/min.png",
