@@ -62,8 +62,26 @@
   .week{font-size:13px; color:#aab2c7; letter-spacing:.3px}
 
   /* Modal bottom-sheet */
-  .overlay{position:fixed; inset:0; display:none; background:rgba(0,0,0,.55); z-index:50}
-  .overlay.show{display:block}
+  /* El overlay debe cubrir toda la pantalla y bloquear interacción */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* oscurece el fondo */
+  display: none;
+  justify-content: center;
+  align-items: flex-end; /* o center según tu diseño */
+  z-index: 1000; /* bien arriba */
+  overflow: hidden;
+  pointer-events: none; /* por defecto deshabilitado */
+}
+
+.overlay.show {
+  display: flex;
+  pointer-events: auto; /* cuando está activo sí bloquea clics */
+}
   .sheet{
     position:fixed; left:0; right:0; bottom:0;
     background:linear-gradient(180deg, #0e1420, #0b0f18);
