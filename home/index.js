@@ -90,14 +90,14 @@ function gameItem(g){
 
   const teams = document.createElement("div");
   teams.className = "teams";
-    const away = document.createElement("div");
-    away.className = "team";
-    away.innerHTML = `${teamLogo(g.away) ? `<img class="logo-img" src="${teamLogo(g.away)}" alt="${g.away} logo" loading="lazy">` : `<div class="logo">${initials(g.away)}</div>`}<div class="name">${g.away}</div>`;
-    const mid  = document.createElement("div");
-    mid.className="vs"; mid.textContent="VS";
-    const home = document.createElement("div");
-    home.className = "team";
-    home.innerHTML = `<div class="name">${g.home}</div>${teamLogo(g.home) ? `<img class="logo-img" src="${teamLogo(g.home)}" alt="${g.home} logo" loading="lazy">` : `<div class="logo">${initials(g.home)}</div>`}`;
+  const away = document.createElement("div");
+  away.className = "team";
+  away.innerHTML = `${teamLogo(g.away) ? `<img class="logo-img" src="${teamLogo(g.away)}" alt="${g.away} logo" loading="lazy">` : `<div class="logo">${initials(g.away)}</div>`}<div class="name">${g.away}</div>`;
+  const mid  = document.createElement("div");
+  mid.className="vs"; mid.textContent="VS";
+  const home = document.createElement("div");
+  home.className = "team";
+  home.innerHTML = `<div class="name">${g.home}</div>${teamLogo(g.home) ? `<img class="logo-img" src="${teamLogo(g.home)}" alt="${g.home} logo" loading="lazy">` : `<div class="logo">${initials(g.home)}</div>`}`;
   teams.append(away, mid, home);
 
   const pick = document.createElement("div"); 
@@ -106,45 +106,46 @@ function gameItem(g){
   // Botones
   const bA = document.createElement("button"); 
   bA.className="chip"; 
-  bA.textContent=g.away; 
+  bA.textContent = g.away; 
   bA.setAttribute("aria-pressed","false");
-
-  const bH = document.createElement("button"); 
-  bH.className="chip"; 
-  bH.textContent=g.home; 
-  bH.setAttribute("aria-pressed","false");
 
   const bT = document.createElement("button"); 
   bT.className="chip"; 
-  bT.textContent="Empate"; 
+  bT.textContent = "Empate"; 
   bT.setAttribute("aria-pressed","false");
+
+  const bH = document.createElement("button"); 
+  bH.className="chip"; 
+  bH.textContent = g.home; 
+  bH.setAttribute("aria-pressed","false");
 
   function select(side){
     picks.set(g.id, side);
-    bA.dataset.active = side==="away"; 
-    bH.dataset.active = side==="home";
+    bA.dataset.active = side==="away";
     bT.dataset.active = side==="tie";
-    bA.setAttribute("aria-pressed", side==="away"); 
-    bH.setAttribute("aria-pressed", side==="home");
+    bH.dataset.active = side==="home";
+    bA.setAttribute("aria-pressed", side==="away");
     bT.setAttribute("aria-pressed", side==="tie");
+    bH.setAttribute("aria-pressed", side==="home");
     updateProgress();
   }
 
   bA.addEventListener("click", ()=>select("away"));
-  bH.addEventListener("click", ()=>select("home"));
   bT.addEventListener("click", ()=>select("tie"));
+  bH.addEventListener("click", ()=>select("home"));
 
   if (picks.has(g.id)) {
     const side = picks.get(g.id);
-    bA.dataset.active = side==="away"; 
-    bH.dataset.active = side==="home";
+    bA.dataset.active = side==="away";
     bT.dataset.active = side==="tie";
-    bA.setAttribute("aria-pressed", side==="away"); 
-    bH.setAttribute("aria-pressed", side==="home");
+    bH.dataset.active = side==="home";
+    bA.setAttribute("aria-pressed", side==="away");
     bT.setAttribute("aria-pressed", side==="tie");
+    bH.setAttribute("aria-pressed", side==="home");
   }
 
-  pick.append(bA, bH, bT);
+  // 👈 OJO: se añaden en orden away, tie, home (Empate queda al centro)
+  pick.append(bA, bT, bH);
   wrap.append(teams, pick);
   return wrap;
 }
@@ -166,7 +167,10 @@ $("#startBtn").addEventListener("click", async ()=>{
       for (const g of GAMES) {
         const found = cloud.picks.find(p => p.id === g.id);
         if (!found) continue;
-        picks.set(g.id, (found.winner === g.away) ? "away" : "home");
+        const side =
+          found.winner === g.away ? "away" :
+          found.winner === g.home ? "home" : "tie";
+        picks.set(g.id, side);
       }
       greetingEl.textContent = `Hola, ${fullName}`;
     } else {
