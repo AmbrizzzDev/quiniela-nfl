@@ -92,34 +92,59 @@ function gameItem(g){
   teams.className = "teams";
     const away = document.createElement("div");
     away.className = "team";
-    away.innerHTML = `${teamLogo(g.away) ? `<img class=\"logo-img\" src=\"${teamLogo(g.away)}\" alt=\"${g.away} logo\" loading=\"lazy\">` : `<div class=\"logo\">${initials(g.away)}</div>`}<div class=\"name\">${g.away}</div>`;
+    away.innerHTML = `${teamLogo(g.away) ? `<img class="logo-img" src="${teamLogo(g.away)}" alt="${g.away} logo" loading="lazy">` : `<div class="logo">${initials(g.away)}</div>`}<div class="name">${g.away}</div>`;
     const mid  = document.createElement("div");
     mid.className="vs"; mid.textContent="VS";
     const home = document.createElement("div");
     home.className = "team";
-    home.innerHTML = `<div class=\"name\">${g.home}</div>${teamLogo(g.home) ? `<img class=\"logo-img\" src=\"${teamLogo(g.home)}\" alt=\"${g.home} logo\" loading=\"lazy\">` : `<div class=\"logo\">${initials(g.home)}</div>`}`;
+    home.innerHTML = `<div class="name">${g.home}</div>${teamLogo(g.home) ? `<img class="logo-img" src="${teamLogo(g.home)}" alt="${g.home} logo" loading="lazy">` : `<div class="logo">${initials(g.home)}</div>`}`;
   teams.append(away, mid, home);
 
-  const pick = document.createElement("div"); pick.className = "pick";
-  const bA = document.createElement("button"); bA.className="chip"; bA.textContent=g.away; bA.setAttribute("aria-pressed","false");
-  const bH = document.createElement("button"); bH.className="chip"; bH.textContent=g.home; bH.setAttribute("aria-pressed","false");
+  const pick = document.createElement("div"); 
+  pick.className = "pick";
+
+  // Botones
+  const bA = document.createElement("button"); 
+  bA.className="chip"; 
+  bA.textContent=g.away; 
+  bA.setAttribute("aria-pressed","false");
+
+  const bH = document.createElement("button"); 
+  bH.className="chip"; 
+  bH.textContent=g.home; 
+  bH.setAttribute("aria-pressed","false");
+
+  const bT = document.createElement("button"); 
+  bT.className="chip"; 
+  bT.textContent="Empate"; 
+  bT.setAttribute("aria-pressed","false");
 
   function select(side){
     picks.set(g.id, side);
-    bA.dataset.active = side==="away"; bH.dataset.active = side==="home";
-    bA.setAttribute("aria-pressed", side==="away"); bH.setAttribute("aria-pressed", side==="home");
+    bA.dataset.active = side==="away"; 
+    bH.dataset.active = side==="home";
+    bT.dataset.active = side==="tie";
+    bA.setAttribute("aria-pressed", side==="away"); 
+    bH.setAttribute("aria-pressed", side==="home");
+    bT.setAttribute("aria-pressed", side==="tie");
     updateProgress();
   }
+
   bA.addEventListener("click", ()=>select("away"));
   bH.addEventListener("click", ()=>select("home"));
+  bT.addEventListener("click", ()=>select("tie"));
 
   if (picks.has(g.id)) {
     const side = picks.get(g.id);
-    bA.dataset.active = side==="away"; bH.dataset.active = side==="home";
-    bA.setAttribute("aria-pressed", side==="away"); bH.setAttribute("aria-pressed", side==="home");
+    bA.dataset.active = side==="away"; 
+    bH.dataset.active = side==="home";
+    bT.dataset.active = side==="tie";
+    bA.setAttribute("aria-pressed", side==="away"); 
+    bH.setAttribute("aria-pressed", side==="home");
+    bT.setAttribute("aria-pressed", side==="tie");
   }
 
-  pick.append(bA, bH);
+  pick.append(bA, bH, bT);
   wrap.append(teams, pick);
   return wrap;
 }
@@ -196,10 +221,13 @@ $("#save").addEventListener("click", ()=>{
   lastSavedEntry = {
   fullName,
   week: CURRENT_WEEK,
-  picks: GAMES.map(g => ({
+  picks: GAMES.map(g => {
+  const side = picks.get(g.id);
+  return {
     id: g.id,
-    winner: picks.get(g.id) === "away" ? g.away : g.home
-  }))
+    winner: side === "away" ? g.away : side === "home" ? g.home : "Empate"
+  };
+})
 };
 
 // Guarda en la nube (sobrescribe por nombre + semana)

@@ -43,7 +43,11 @@
   .logo-img{width:28px; height:28px; border-radius:50%; object-fit:cover; display:block; background:#0e1118}
   .name{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600}
   .vs{opacity:.65; font-weight:800; letter-spacing:.4px}
-  .pick{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .pick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px,1fr));
+  gap: 8px;
+}
   .chip{
     border:1px solid #243053; background:#121a2b; color:var(--text);
     padding:12px; border-radius:12px; font-weight:700; text-align:center;
