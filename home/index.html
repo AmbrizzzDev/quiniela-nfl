@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Quiniela NFL</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="shell">
+  <section id="step1" class="card step active" aria-labelledby="t1">
+    <div class="pad" style="display:grid; gap:12px">
+      <div>
+        <h1 id="t1">Quiniela NFL</h1>
+        <div class="muted">Ingresa tus datos para comenzar.</div>
+      </div>
+      <label>
+        <span class="muted">Nombre</span>
+        <input id="nombre" type="text" placeholder="Ej. José" autocomplete="name" required inputmode="text" />
+      </label>
+      <label>
+        <span class="muted">Inicial del apellido</span>
+        <input id="inicial" type="text" placeholder="A - Z" maxlength="1" required inputmode="text" />
+      </label>
+      <div class="infocard" aria-label="Instrucciones">
+        <h3 class="ic-title">Instrucciones</h3>
+        <ul class="ic-list">
+          <li>Debes completar todos los partidos para poder guardar.</li>
+          <li>Podrás <strong>modificar</strong> tus selecciones.</li>
+          <li>La selección de picks <strong>cierra a las 18:14 del día jueves.</strong></li>
+        </ul>
+        <div class="ic-format" aria-label="Formato de los partidos">
+          <span class="ic-badge">Visitante</span>
+          <span class="ic-vs">VS</span>
+          <span class="ic-badge">Local</span>
+        </div>
+      </div>
+      <div class="row">
+        <button id="startBtn" class="btn primary" style="width:100%">Comenzar</button>
+      </div>
+      <span id="err1" class="err">Escribe tu nombre y una sola inicial (A–Z).</span>
+    </div>
+  </section>
+
+  <section id="step2" class="step card" aria-labelledby="t2">
+    <div class="pad" style="display:grid; gap:10px">
+      <div class="topbar">
+        <div>
+          <h1 id="t2">Elige un ganador</h1>
+          <div class="muted" id="greeting"></div>
+        </div>
+        <div class="week" id="weekLabel">Semana 1</div>
+      </div>
+
+      <div id="games"></div>
+
+      <div class="toolbar">
+        <div class="progress"><div id="bar"></div></div>
+        <div class="row" style="justify-content:space-between">
+          <div class="muted"><span id="done">0</span>/<span id="total">0</span> partidos</div>
+          <button id="reset" class="btn secondary" type="button">Limpiar</button>
+        </div>
+        <span id="err2" class="err">Te falta elegir en algunos partidos.</span>
+      </div>
+    </div>
+
+    <div class="sticky">
+      <button id="save" class="btn primary" type="button" disabled>Guardar picks</button>
+    </div>
+  </section>
+</div>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="confTitle">
+  <div class="sheet" role="document">
+    <div class="drag"></div>
+    <h2 id="confTitle">¡Guardado con éxito!</h2>
+    <p id="confMsg" class="muted">Tus selecciones han sido registradas.</p>
+    <div class="wrapper"> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/> <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+</svg>
+</div>
+    <div class="actions">
+      <button id="addAnother" class="btn primary" type="button">Agregar otra persona</button>
+      <button id="editPicks" class="btn ghost" type="button">Modificar picks</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase v8 compat (más simple) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+  // 1) Pega aquí tu config (de la consola de Firebase)
+  const firebaseConfig = {
+    apiKey: "AIzaSyA3jb-tEWLui0dapNhjRHiLIbVT-i9YtII",
+    authDomain: "quiniela-picks.firebaseapp.com",
+    projectId: "quiniela-picks",
+    storageBucket: "quiniela-picks.firebasestorage.app",
+    messagingSenderId: "150833467380",
+    appId: "1:150833467380:web:c32373eaa6bb5805dd33a1"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // 2) Identificador de tu quiniela/evento (elige uno y compártelo si tienes varias ligas)
+  const EVENT_ID = "quiniela-2025";
+</script>
+<script src="index.js"></script>
+</body>
+</html>
