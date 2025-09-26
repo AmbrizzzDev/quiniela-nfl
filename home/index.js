@@ -83,6 +83,23 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
+const DEADLINE = new Date("2025-09-25T18:14:00"); // fecha y hora límite
+
+function checkDeadline(){
+  const now = new Date();
+  if(now >= DEADLINE){
+    // Bloquea toda la app
+    document.querySelector("#step1").innerHTML = `
+    <div class="closed-message">
+      <h1>Quiniela cerrada</h1>
+      <p>Ya no se pueden registrar ni modificar picks.</p>
+    </div>`;
+    document.querySelector("#step2").remove(); // opcional: quita el paso 2
+  }
+}
+
+checkDeadline();
+
 function gameItem(g){
   const wrap = document.createElement("div");
   wrap.className = "game";
