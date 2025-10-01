@@ -1,22 +1,20 @@
-const CURRENT_WEEK = 4;
+const CURRENT_WEEK = 5;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
-  { id: "Seawaks vs Cardinals", away: "Seahawks", home: "Cardinals" },
-  { id: "Vikings vs Steelers", away: "Vikings",  home: "Steelers" },
-  { id: "Commanders vs Falcons", away: "Commanders",  home: "Falcons" },
-  { id: "Saints vs Bills", away: "Saints",home: "Bills" },
-  { id: "Browns vs Lions", away: "Browns",   home: "Lions" },
-  { id: "Panthers vs Patriots", away: "Panthers",  home: "Patriots" },
-  { id: "Chargers vs Giants", away: "Chargers",    home: "Giants" },
-  { id: "Eagles vs Buccaneers", away: "Eagles",     home: "Buccaneers" },
-  { id: "Titans vs Texans", away: "Titans",     home: "Texans" },
-  { id: "Colts vs Rams", away: "Colts",     home: "Rams" },
-  { id: "Jaguars vs 49ers", away: "Jaguars",     home: "49ers" },
-  { id: "Ravens vs Chiefs", away: "Ravens",     home: "Chiefs" },
-  { id: "Bears vs Raiders", away: "Bears",     home: "Raiders" },
-  { id: "Packers vs Cowboys", away: "Packers",     home: "Cowboys" },
-  { id: "Jets vs Dolphins", away: "Jets",     home: "Dolphins" },
-  { id: "Bengals vs Broncos", away: "Bengals",     home: "Broncos" }
+  { id: "49ers vs Rams", away: "49ers", home: "Rams" },
+  { id: "Vikings vs Browns", away: "Vikings",  home: "Browns" },
+  { id: "Raiders vs Colts", away: "Raiders",  home: "Colts" },
+  { id: "Giants vs Saints", away: "Giants",home: "Saints" },
+  { id: "Cowboys vs Jets", away: "Cowboys",   home: "Jets" },
+  { id: "Broncos vs Eagles", away: "Broncos",  home: "Eagles" },
+  { id: "Dolphins vs Panthers", away: "Dolphins",    home: "Panthers" },
+  { id: "Texans vs Ravens", away: "Texans",     home: "Ravens" },
+  { id: "Titans vs Cardinals", away: "Titans",     home: "Cardinals" },
+  { id: "Buccaneers vs Seahawks", away: "Buccaneers",     home: "Seahawks" },
+  { id: "Lions vs Bengals", away: "Lions",     home: "Bengals" },
+  { id: "Commanders vs Chargers", away: "Commanders",     home: "Chargers" },
+  { id: "Patriots vs Bills", away: "Patriots",     home: "Bills" },
+  { id: "Chiefs vs Jaguars", away: "Chiefs",     home: "Jaguars" },
 ];
 
 const TEAM_LOGOS = {
@@ -83,7 +81,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-09-25T18:14:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-02T18:14:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
