@@ -1,6 +1,5 @@
 const CURRENT_WEEK = 5;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
-const EVENT_ID = "quiniela-2025"; // Moved from HTML to avoid scope issues
 const GAMES = [
   { id: "49ers vs Rams", away: "49ers", home: "Rams" },
   { id: "Vikings vs Browns", away: "Vikings",  home: "Browns" },
@@ -82,7 +81,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-02T18:50:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-02T18:45:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
@@ -190,8 +189,7 @@ $("#startBtn").addEventListener("click", async ()=>{
     } else {
       greetingEl.textContent = `Hola, ${fullName}`;
     }
-  } catch (error) {
-    console.warn('Error loading from cloud:', error);
+  } catch {
     greetingEl.textContent = `Hola, ${fullName}`;
   }
 
@@ -207,6 +205,19 @@ function renderGames(){
   updateProgress();
 }
 
+$("#startBtn").addEventListener("click", ()=>{
+  const nombre = $("#nombre").value.trim();
+  let inicial = $("#inicial").value.trim();
+  const ok = nombre.length >= 2 && /^[a-z]$/i.test(inicial);
+  if(!ok){ $("#err1").classList.add("show"); return; }
+  $("#err1").classList.remove("show");
+  inicial = inicial.toUpperCase();
+  fullName = `${nombre} ${inicial}.`;
+  greetingEl.textContent = `Hola, ${fullName}`;
+  $("#step1").classList.remove("active");
+  $("#step2").classList.add("active");
+  renderGames();
+});
 
 $("#reset").addEventListener("click", ()=>{ picks.clear(); renderGames(); });
 
@@ -236,19 +247,8 @@ $("#save").addEventListener("click", ()=>{
 })
 };
 
-// Save to cloud and sync to sheets
-Promise.all([
-  saveToCloud(lastSavedEntry).catch(error => {
-    console.error('Firebase save failed:', error);
-    // Could show user notification here
-  }),
-  syncToSheet(lastSavedEntry).catch(error => {
-    console.error('Google Sheets sync failed:', error);
-    // Could show user notification here
-  })
-]).then(() => {
-  console.log('All saves completed for:', lastSavedEntry.fullName);
-});
+saveToCloud(lastSavedEntry).catch(console.error);
+syncToSheet(lastSavedEntry);
 
 openSheet();
 playSaveAnim();
@@ -257,38 +257,21 @@ playSaveAnim();
 const normName = s => String(s || '').trim().toUpperCase();
 
 async function saveToCloud(entry){
-  try {
-    const docId = normName(entry.fullName);
-    const ref = db.doc(`events/${EVENT_ID}/weeks/${entry.week}/picks/${docId}`);
-    await ref.set({
-      fullName: entry.fullName,
-      week: entry.week,
-      picks: entry.picks, 
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-    console.log('Successfully saved to cloud:', entry.fullName);
-  } catch (error) {
-    console.error('Error saving to cloud:', error);
-    throw error;
-  }
+  const docId = normName(entry.fullName);
+  const ref = db.doc(`events/${EVENT_ID}/weeks/${entry.week}/picks/${docId}`);
+  await ref.set({
+    fullName: entry.fullName,
+    week: entry.week,
+    picks: entry.picks, 
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true });
 }
 
 async function loadFromCloud(fullName, week){
-  try {
-    const docId = normName(fullName);
-    const ref = db.doc(`events/${EVENT_ID}/weeks/${week}/picks/${docId}`);
-    const snap = await ref.get();
-    if (snap.exists) {
-      console.log('Successfully loaded from cloud:', fullName);
-      return snap.data();
-    } else {
-      console.log('No data found in cloud for:', fullName);
-      return null;
-    }
-  } catch (error) {
-    console.error('Error loading from cloud:', error);
-    return null;
-  }
+  const docId = normName(fullName);
+  const ref = db.doc(`events/${EVENT_ID}/weeks/${week}/picks/${docId}`);
+  const snap = await ref.get();
+  return snap.exists ? snap.data() : null;
 }
 
 function playSaveAnim(){
@@ -327,19 +310,11 @@ async function syncToSheet(entry){
     picks: entry.picks          
   };
   try {
-    const response = await fetch(WEB_APP_URL, {
+    await fetch(WEB_APP_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      mode: 'no-cors',        
       body: JSON.stringify(payload)
     });
-    
-    if (response.ok) {
-      console.log('Successfully synced to Google Sheets:', entry.fullName);
-    } else {
-      console.warn('Google Sheets sync failed with status:', response.status);
-    }
   } catch (e) {
     console.warn('Sync Sheets falló:', e);
   }
