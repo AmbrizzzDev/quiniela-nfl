@@ -1,20 +1,21 @@
-const CURRENT_WEEK = 5;
+const CURRENT_WEEK = 6;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
-  { id: "49ers vs Rams", away: "49ers", home: "Rams" },
-  { id: "Vikings vs Browns", away: "Vikings",  home: "Browns" },
-  { id: "Raiders vs Colts", away: "Raiders",  home: "Colts" },
-  { id: "Giants vs Saints", away: "Giants",home: "Saints" },
-  { id: "Cowboys vs Jets", away: "Cowboys",   home: "Jets" },
-  { id: "Broncos vs Eagles", away: "Broncos",  home: "Eagles" },
-  { id: "Dolphins vs Panthers", away: "Dolphins",    home: "Panthers" },
-  { id: "Texans vs Ravens", away: "Texans",     home: "Ravens" },
-  { id: "Titans vs Cardinals", away: "Titans",     home: "Cardinals" },
-  { id: "Buccaneers vs Seahawks", away: "Buccaneers",     home: "Seahawks" },
-  { id: "Lions vs Bengals", away: "Lions",     home: "Bengals" },
-  { id: "Commanders vs Chargers", away: "Commanders",     home: "Chargers" },
-  { id: "Patriots vs Bills", away: "Patriots",     home: "Bills" },
-  { id: "Chiefs vs Jaguars", away: "Chiefs",     home: "Jaguars" },
+  { id: "Eagles vs Giants", away: "Eagles", home: "Giants" },
+  { id: "Broncos vs Jets", away: "Broncos",  home: "Jets" },
+  { id: "Seahawks vs Jaguars", away: "Seahawks",  home: "Jaguars" },
+  { id: "Chargers vs Dolphins", away: "Chargers",home: "Dolphins" },
+  { id: "Rams vs Ravens", away: "Rams",   home: "Ravens" },
+  { id: "Cardinals vs Colts", away: "Cardinals",  home: "Colts" },
+  { id: "Cowboys vs Panthers", away: "Cowboys",    home: "Panthers" },
+  { id: "Patriots vs Saints", away: "Patriots",     home: "Saints" },
+  { id: "Browns vs Steelers", away: "Browns",     home: "Steelers" },
+  { id: "Titans vs Raiders", away: "Titans",     home: "Raiders" },
+  { id: "49ers vs Buccaneers", away: "49ers",     home: "Buccaneers" },
+  { id: "Bengals vs Packers", away: "Bengals",     home: "Packers" },
+  { id: "Lions vs Chiefs", away: "Lions",     home: "Chiefs" },
+  { id: "Bills vs Falcons", away: "Bills",     home: "Falcons" },
+  { id: "Bears vs Commanders", away: "Bears",     home: "Commanders" },
 ];
 
 const TEAM_LOGOS = {
@@ -81,7 +82,13 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-02T18:30:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-09T18:15:00"); // definir en el script del servidor
+const CORS = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
 
 function checkDeadline(){
   const now = new Date();
@@ -92,7 +99,7 @@ function checkDeadline(){
       <h1>Quiniela cerrada</h1>
       <p>Ya no se pueden registrar ni modificar picks.</p>
     </div>`;
-    document.querySelector("#step2").remove(); // opcional: quita el paso 2
+    document.querySelector("#step2").remove();
   }
 }
 
@@ -299,22 +306,25 @@ $("#editPicks").addEventListener("click", ()=>{ closeSheet();});
 });
 
 
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwcJvKSP1o00zGGI9-HBDuyoF8y_ev0QSFnE8j_YNV5XVILfkPzp-fPaB_4fwhceR9N/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyUIuBCUU7JLRLgD8HIhqoIUtUqORjmx0uUSJYw4MSSAh0iFLN4WkgpuPEfM4mGAFOx/exec';
 const SHARED_SECRET = 'quiniela-picks';
 
 async function syncToSheet(entry){
   const payload = {
     secret: SHARED_SECRET,
     fullName: entry.fullName,
-    week: entry.week,           
-    picks: entry.picks          
+    week: entry.week,
+    picks: entry.picks
   };
   try {
-    await fetch(WEB_APP_URL, {
+    const res = await fetch(WEB_APP_URL, {
       method: 'POST',
-      mode: 'no-cors',        
+      mode: 'cors',                     // usar cors normal
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    const data = await res.json().catch(()=>null);
+    console.log('syncToSheet response', res.status, data);
   } catch (e) {
     console.warn('Sync Sheets falló:', e);
   }
