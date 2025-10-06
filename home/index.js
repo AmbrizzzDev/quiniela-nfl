@@ -1,4 +1,4 @@
-const CURRENT_WEEK = 6;
+const CURRENT_WEEK = 5;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
   { id: "Eagles vs Giants", away: "Eagles", home: "Giants" },
@@ -82,13 +82,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-09T18:15:00"); // definir en el script del servidor
-const CORS = {
-  'Content-Type': 'application/json; charset=utf-8',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+const DEADLINE = new Date("2025-10-02T18:30:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
@@ -99,7 +93,7 @@ function checkDeadline(){
       <h1>Quiniela cerrada</h1>
       <p>Ya no se pueden registrar ni modificar picks.</p>
     </div>`;
-    document.querySelector("#step2").remove();
+    document.querySelector("#step2").remove(); // opcional: quita el paso 2
   }
 }
 
@@ -306,25 +300,22 @@ $("#editPicks").addEventListener("click", ()=>{ closeSheet();});
 });
 
 
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyUIuBCUU7JLRLgD8HIhqoIUtUqORjmx0uUSJYw4MSSAh0iFLN4WkgpuPEfM4mGAFOx/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwcJvKSP1o00zGGI9-HBDuyoF8y_ev0QSFnE8j_YNV5XVILfkPzp-fPaB_4fwhceR9N/exec';
 const SHARED_SECRET = 'quiniela-picks';
 
 async function syncToSheet(entry){
   const payload = {
     secret: SHARED_SECRET,
     fullName: entry.fullName,
-    week: entry.week,
-    picks: entry.picks
+    week: entry.week,           
+    picks: entry.picks          
   };
   try {
-    const res = await fetch(WEB_APP_URL, {
+    await fetch(WEB_APP_URL, {
       method: 'POST',
-      mode: 'cors',                     // usar cors normal
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',        
       body: JSON.stringify(payload)
     });
-    const data = await res.json().catch(()=>null);
-    console.log('syncToSheet response', res.status, data);
   } catch (e) {
     console.warn('Sync Sheets falló:', e);
   }
