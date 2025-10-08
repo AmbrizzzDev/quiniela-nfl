@@ -165,6 +165,121 @@ function gameItem(g){
   return wrap;
 }
 
+// ---- 🎯 JUGADA ESPECIAL ---- //
+let specialGame = null;
+let specialWinner = null;
+let specialRange = null;
+
+function renderSpecialPick() {
+  const sel = document.querySelector("#specialGame");
+  const winnerContainer = document.querySelector("#specialWinner");
+  const rangeContainer = document.querySelector("#specialRange");
+  const rangeBtns = rangeContainer.querySelectorAll(".chip");
+
+  // Ocultar al inicio
+  winnerContainer.style.display = "none";
+  rangeContainer.style.display = "none";
+
+  // Llenar selector de partidos
+  sel.innerHTML = `<option value="">Selecciona un partido</option>`;
+  GAMES.forEach(g => {
+    sel.innerHTML += `<option value="${g.id}">${g.away} vs ${g.home}</option>`;
+  });
+
+  // Cuando seleccionan un partido
+  sel.addEventListener("change", () => {
+    specialGame = sel.value;
+    specialWinner = null;
+    specialRange = null;
+    winnerContainer.innerHTML = "";
+
+    // Si no eligió nada, ocultar todo
+    if (!specialGame) {
+      winnerContainer.style.display = "none";
+      rangeContainer.style.display = "none";
+      return;
+    }
+
+    // Buscar los equipos del partido elegido
+    const game = GAMES.find(g => g.id === specialGame);
+    if (!game) return;
+
+    // Crear los botones de ganador
+    const awayBtn = document.createElement("button");
+    awayBtn.className = "chip";
+    awayBtn.textContent = game.away;
+    awayBtn.onclick = () => selectSpecialWinner(game.away, awayBtn);
+
+    const homeBtn = document.createElement("button");
+    homeBtn.className = "chip";
+    homeBtn.textContent = game.home;
+    homeBtn.onclick = () => selectSpecialWinner(game.home, homeBtn);
+
+    winnerContainer.append(awayBtn, homeBtn);
+    winnerContainer.style.display = "grid"; // mostrar botones
+    rangeContainer.style.display = "none"; // rango aún oculto
+  });
+
+  // Aplicar estado de specialPick a la UI (si venía de la nube)
+if (specialGame) {
+  const sel = document.querySelector("#specialGame");
+  if (sel) sel.value = specialGame;
+
+  // Fuerza ejecución del change handler para construir botones
+  const ev = new Event('change', { bubbles: true });
+  sel.dispatchEvent(ev);
+
+  // Marca ganador si hay
+  if (specialWinner) {
+    // buscar botón dentro de #specialWinner con texto igual a specialWinner
+    const winnerBtns = Array.from(document.querySelectorAll("#specialWinner .chip"));
+    const match = winnerBtns.find(b => b.textContent.trim() === specialWinner);
+    if (match) {
+      match.click(); // invoca selectSpecialWinner y marca el botón
+    }
+  }
+  // Marca rango si hay
+  if (specialRange) {
+    const rangeBtns = Array.from(document.querySelectorAll("#specialRange .chip"));
+    const rb = rangeBtns.find(b => b.dataset.range === specialRange);
+    if (rb) rb.click();
+  }
+}
+
+  // Cuando elige ganador, mostrar rangos
+  function selectSpecialWinner(team, btn) {
+    specialWinner = team;
+    document.querySelectorAll("#specialWinner .chip").forEach(b => b.dataset.active = false);
+    btn.dataset.active = true;
+    rangeContainer.style.display = "grid"; // mostrar los rangos
+  }
+
+  // Guardar función global
+  window.selectSpecialWinner = selectSpecialWinner;
+
+  // Selección de rango
+  rangeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      specialRange = btn.dataset.range;
+      rangeBtns.forEach(b => b.dataset.active = false);
+      btn.dataset.active = true;
+    });
+  });
+}
+
+document.addEventListener("change", e => {
+  if (e.target.id === "specialGame") specialGame = e.target.value;
+});
+
+document.querySelectorAll("#rangeSelect .chip").forEach(btn => {
+  btn.addEventListener("click", () => {
+    specialRange = btn.dataset.range;
+    document.querySelectorAll("#rangeSelect .chip").forEach(b => b.dataset.active = false);
+    btn.dataset.active = true;
+  });
+});
+
+
 $("#startBtn").addEventListener("click", async ()=>{
   const nombre = $("#nombre").value.trim();
   let inicial = $("#inicial").value.trim();
@@ -186,8 +301,20 @@ $("#startBtn").addEventListener("click", async ()=>{
           found.winner === g.home ? "home" : "tie";
         picks.set(g.id, side);
       }
+    
+      // --- carga jugada especial si existe ---
+      if (cloud.specialPick) {
+        specialGame = cloud.specialPick.game || null;
+        specialWinner = cloud.specialPick.winner || null;
+        specialRange = cloud.specialPick.range || null;
+      } else {
+        specialGame = null;
+        specialWinner = null;
+        specialRange = null;
+      }
+    
       greetingEl.textContent = `Hola, ${fullName}`;
-    } else {
+    }else {
       greetingEl.textContent = `Hola, ${fullName}`;
     }
   } catch {
@@ -197,6 +324,7 @@ $("#startBtn").addEventListener("click", async ()=>{
   $("#step1").classList.remove("active");
   $("#step2").classList.add("active");
   renderGames();
+  renderSpecialPick();
 });
 
 function renderGames(){
@@ -218,6 +346,7 @@ $("#startBtn").addEventListener("click", ()=>{
   $("#step1").classList.remove("active");
   $("#step2").classList.add("active");
   renderGames();
+  renderSpecialPick();
 });
 
 $("#reset").addEventListener("click", ()=>{ picks.clear(); renderGames(); });
@@ -245,7 +374,12 @@ $("#save").addEventListener("click", ()=>{
     id: g.id,
     winner: side === "away" ? g.away : side === "home" ? g.home : "Empate"
   };
-})
+  }),
+  specialPick: {
+  game: specialGame,
+  winner: specialWinner,
+  range: specialRange
+}
 };
 
 saveToCloud(lastSavedEntry).catch(console.error);
@@ -263,7 +397,8 @@ async function saveToCloud(entry){
   await ref.set({
     fullName: entry.fullName,
     week: entry.week,
-    picks: entry.picks, 
+    picks: entry.picks,
+    specialPick: entry.specialPick || null, 
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   }, { merge: true });
 }
@@ -300,7 +435,7 @@ $("#editPicks").addEventListener("click", ()=>{ closeSheet();});
 });
 
 
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwcJvKSP1o00zGGI9-HBDuyoF8y_ev0QSFnE8j_YNV5XVILfkPzp-fPaB_4fwhceR9N/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzjHg0Ug-UwgO7IwgK0MIqHNu367W8gaVlN2DSgZ-vvMD8a7G4FNckOFY6iBXdAogPO/exec';
 const SHARED_SECRET = 'quiniela-picks';
 
 async function syncToSheet(entry){
@@ -308,7 +443,8 @@ async function syncToSheet(entry){
     secret: SHARED_SECRET,
     fullName: entry.fullName,
     week: entry.week,           
-    picks: entry.picks          
+    picks: entry.picks,
+    specialPick: entry.specialPick || null      
   };
   try {
     await fetch(WEB_APP_URL, {

@@ -65,6 +65,27 @@
       </div>
     </div>
 
+    <div id="specialPickCard" class="infocard" style="margin-top:14px">
+      <h3 class="ic-title">🎯 Jugada especial</h3>
+      <p class="muted">Elige un partido, predice el ganador y el rango de puntos.</p>
+    
+      <label class="muted">Partido</label>
+      <select id="specialGame" class="btn secondary" style="width:100%">
+        <option value="">Selecciona un partido</option>
+      </select>
+    
+      <div id="specialWinner" class="pick" style="margin-top:10px"></div>
+    
+      <div id="specialRange" class="pick" style="margin-top:10px">
+        <button class="chip" data-range="0-7">0–7 pts</button>
+        <button class="chip" data-range="8-14">8–14 pts</button>
+        <button class="chip" data-range="15-21">15–21 pts</button>
+        <button class="chip" data-range="22+">22+ pts</button>
+      </div>
+    </div>
+    
+    
+
     <div class="sticky">
       <button id="save" class="btn primary" type="button" disabled>Guardar picks</button>
     </div>
