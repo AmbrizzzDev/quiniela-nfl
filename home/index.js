@@ -1,4 +1,4 @@
-const CURRENT_WEEK = 5;
+const CURRENT_WEEK = 6;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
   { id: "Eagles vs Giants", away: "Eagles", home: "Giants" },
@@ -82,7 +82,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-02T18:30:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-09T18:15:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
