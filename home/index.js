@@ -176,8 +176,29 @@ function renderSpecialPick() {
   const rangeContainer = document.querySelector("#specialRange");
   const rangeBtns = rangeContainer.querySelectorAll(".chip");
 
+  // Crea o reutiliza labels informativos
+  let winnerLabel = document.querySelector("#specialWinnerLabel");
+  if (!winnerLabel) {
+    winnerLabel = document.createElement("div");
+    winnerLabel.id = "specialWinnerLabel";
+    winnerLabel.className = "sp-label";
+    winnerLabel.textContent = "Elige un ganador";
+    winnerContainer.parentNode.insertBefore(winnerLabel, winnerContainer);
+  }
+
+  let rangeLabel = document.querySelector("#specialRangeLabel");
+  if (!rangeLabel) {
+    rangeLabel = document.createElement("div");
+    rangeLabel.id = "specialRangeLabel";
+    rangeLabel.className = "sp-label";
+    rangeLabel.textContent = "Elige la diferencia de puntos";
+    rangeContainer.parentNode.insertBefore(rangeLabel, rangeContainer);
+  }
+
   // Ocultar al inicio
+  winnerLabel.style.display = "none";
   winnerContainer.style.display = "none";
+  rangeLabel.style.display = "none";
   rangeContainer.style.display = "none";
 
   // Llenar selector de partidos
@@ -195,7 +216,9 @@ function renderSpecialPick() {
 
     // Si no eligió nada, ocultar todo
     if (!specialGame) {
+      winnerLabel.style.display = "none";
       winnerContainer.style.display = "none";
+      rangeLabel.style.display = "none";
       rangeContainer.style.display = "none";
       return;
     }
@@ -216,36 +239,40 @@ function renderSpecialPick() {
     homeBtn.onclick = () => selectSpecialWinner(game.home, homeBtn);
 
     winnerContainer.append(awayBtn, homeBtn);
-    winnerContainer.style.display = "grid"; // mostrar botones
-    rangeContainer.style.display = "none"; // rango aún oculto
+
+    // Mostrar label y botones de ganador
+    winnerLabel.style.display = "block";
+    winnerContainer.style.display = "grid";
+
+    // Ocultar rango hasta que elijan ganador
+    rangeLabel.style.display = "none";
+    rangeContainer.style.display = "none";
   });
 
-  // Aplicar estado de specialPick a la UI (si venía de la nube)
-if (specialGame) {
-  const sel = document.querySelector("#specialGame");
-  if (sel) sel.value = specialGame;
+  // Cuando elige ganador, mostrar rangos
+  function selectSpecialWinner(team, btn) {
+    specialWinner = team;
+    document.querySelectorAll("#specialWinner .chip").forEach(b => b.dataset.active = false);
+    btn.dataset.active = true;
 
-  // Fuerza ejecución del change handler para construir botones
-  const ev = new Event('change', { bubbles: true });
-  sel.dispatchEvent(ev);
-
-  // Marca ganador si hay
-  if (specialWinner) {
-    // buscar botón dentro de #specialWinner con texto igual a specialWinner
-    const winnerBtns = Array.from(document.querySelectorAll("#specialWinner .chip"));
-    const match = winnerBtns.find(b => b.textContent.trim() === specialWinner);
-    if (match) {
-      match.click(); // invoca selectSpecialWinner y marca el botón
-    }
+    // Mostrar label + rangos
+    rangeLabel.style.display = "block";
+    rangeContainer.style.display = "grid";
   }
-  // Marca rango si hay
-  if (specialRange) {
-    const rangeBtns = Array.from(document.querySelectorAll("#specialRange .chip"));
-    const rb = rangeBtns.find(b => b.dataset.range === specialRange);
-    if (rb) rb.click();
-  }
-}
 
+  // Guardar función global
+  window.selectSpecialWinner = selectSpecialWinner;
+
+  // Selección de rango
+  rangeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      specialRange = btn.dataset.range;
+      rangeBtns.forEach(b => b.dataset.active = false);
+      btn.dataset.active = true;
+    });
+  });
+
+  
   // Cuando elige ganador, mostrar rangos
   function selectSpecialWinner(team, btn) {
     specialWinner = team;

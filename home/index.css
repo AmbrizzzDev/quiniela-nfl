@@ -186,3 +186,18 @@ body.no-scroll {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
+
+/* Labels para la jugada especial */
+.sp-label {
+  font-size: 14px;
+  color: #6b7280; /* gris */
+  margin: 6px 0 8px;
+  padding-left: 4px;
+}
+
+/* Ajustes de layout para winner/range cuando se muestran */
+#specialWinner, #specialRange {
+  display: none; /* se controlan desde JS */
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
