@@ -82,7 +82,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-09T18:15:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-09T18:20:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
