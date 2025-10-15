@@ -4,7 +4,7 @@ const GAMES = [
   { id: "Steelers vs Bengals", away: "Steelers", home: "Bengals" },
   { id: "Rams vs Jaguars", away: "Rams",  home: "Jaguars" },
   { id: "Saints vs Bears", away: "Saints",  home: "Bears" },
-  { id: "Dolphins vs Browns", away: "Chargers",home: "Dolphins" },
+  { id: "Dolphins vs Browns", away: "Dolphins",home: "Browns" },
   { id: "Patriots vs Titans", away: "Patriots",   home: "Titans" },
   { id: "Raiders vs Chiefs", away: "Raiders",  home: "Chiefs" },
   { id: "Eagles vs Vikings", away: "Eagles",    home: "Vikings" },
