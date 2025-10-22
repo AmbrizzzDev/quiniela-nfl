@@ -1,21 +1,19 @@
 const CURRENT_WEEK = 7;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
-  { id: "Steelers vs Bengals", away: "Steelers", home: "Bengals" },
-  { id: "Rams vs Jaguars", away: "Rams",  home: "Jaguars" },
-  { id: "Saints vs Bears", away: "Saints",  home: "Bears" },
-  { id: "Dolphins vs Browns", away: "Dolphins",home: "Browns" },
-  { id: "Patriots vs Titans", away: "Patriots",   home: "Titans" },
-  { id: "Raiders vs Chiefs", away: "Raiders",  home: "Chiefs" },
-  { id: "Eagles vs Vikings", away: "Eagles",    home: "Vikings" },
-  { id: "Panthers vs Jets", away: "Panthers",     home: "Jets" },
-  { id: "Giants vs Broncos", away: "Giants",     home: "Broncos" },
-  { id: "Colts vs Chargers", away: "Colts",     home: "Chargers" },
-  { id: "Commanders vs Cowboys", away: "Commanders",     home: "Cowboys" },
-  { id: "Packers vs Cardinals", away: "Packers",     home: "Cardinals" },
-  { id: "Falcons vs 49ers", away: "Falcons",     home: "49ers" },
-  { id: "Buccaneers vs Lions", away: "Buccaneers",     home: "Lions" },
-  { id: "Texans vs Seahawks", away: "Texans",     home: "Seahawks" },
+  { id: "Vikings vs Chargers", away: "Vikings", home: "Chargers" },
+  { id: "Dolphins vs Falcons", away: "Dolphins", home: "Falcons" },
+  { id: "Jets vs Bengals", away: "Jets",  home: "Bengals" },
+  { id: "Browns vs Patriots", away: "Browns", home: "Patriots" },
+  { id: "Giants vs Eagles", away: "Giants",     home: "Eagles" },
+  { id: "Bills vs Panthers", away: "Bills",  home: "Panthers" },
+  { id: "Bears vs Ravens", away: "Bears",    home: "Ravens" },
+  { id: "49ers vs Texans", away: "49ers",     home: "Texans" },
+  { id: "Buccaneers vs Saints", away: "Buccaneers",     home: "Saints" },
+  { id: "Cowboys vs Broncos", away: "Cowboys",     home: "Broncos" },
+  { id: "Titans vs Colts", away: "Titans",     home: "Colts" },
+  { id: "Packers vs Steelers", away: "Packers",     home: "Steelers" },
+  { id: "Commanders vs Chiefs", away: "Commanders",     home: "Chiefs" },
 ];
 
 const TEAM_LOGOS = {
@@ -82,7 +80,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-16T18:20:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-10-23T18:20:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
