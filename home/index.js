@@ -1,4 +1,4 @@
-const CURRENT_WEEK = 7;
+const CURRENT_WEEK = 8;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
   { id: "Vikings vs Chargers", away: "Vikings", home: "Chargers" },
