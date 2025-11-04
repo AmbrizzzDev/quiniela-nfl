@@ -1,20 +1,21 @@
-const CURRENT_WEEK = 9;
+const CURRENT_WEEK = 10;
 const WEEK_LABEL = `Semana ${CURRENT_WEEK}`;
 const GAMES = [
-  { id: "Ravens vs Dolphins", away: "Ravens", home: "Dolphins" },
-  { id: "Bears vs Bengals", away: "Bears", home: "Bengals" },
-  { id: "Vikings vs Lions", away: "Vikings",  home: "Lions" },
-  { id: "Panthers vs Packers", away: "Panthers", home: "Packers" },
-  { id: "Chargers vs Titans", away: "Chargers",     home: "Titans" },
-  { id: "Falcons vs Patriots", away: "Falcons",  home: "Patriots" },
-  { id: "49ers vs Giants", away: "49ers",    home: "Giants" },
-  { id: "Colts vs Steelers", away: "Colts",     home: "Steelers" },
-  { id: "Broncos vs Texans", away: "Broncos",     home: "Texans" },
-  { id: "Jaguars vs Raiders", away: "Jaguars",     home: "Raiders" },
-  { id: "Saints vs Rams", away: "Saints",     home: "Rams" },
-  { id: "Chiefs vs Bills", away: "Chiefs",     home: "Bills" },
-  { id: "Seahwaks vs Commanders", away: "Seahawks",     home: "Commanders" },
-  { id: "Cardinals vs Cowboys", away: "Cardinals",     home: "Cowboys" },
+  { id: "Raiders vs Broncos", away: "Raiders", home: "Broncos" },
+  { id: "Falcons vs Colts", away: "Falcons", home: "Colts" },
+  { id: "Browns vs Jets", away: "Browns", home: "Jets" },
+  { id: "Saints vs Panthers", away: "Saints", home: "Panthers" },
+  { id: "Patriots vs Buccaneers", away: "Patriots", home: "Buccaneers" },
+  { id: "Falcons vs Colts", away: "Falcons", home: "Colts" },
+  { id: "Giants vs Bears", away: "Giants", home: "Bears" },
+  { id: "Bills vs Dolphins", away: "Bills", home: "Dolphins" },
+  { id: "Ravens vs Vikings", away: "Ravens", home: "Vikings" },
+  { id: "Jaguars vs Texans", away: "Jaguars", home: "Texans" },
+  { id: "Cardinals vs Seahawks", away: "Cardinals", home: "Seahawks" },
+  { id: "Rams vs 49ers", away: "Rams", home: "49ers" },
+  { id: "Lions vs Commanders", away: "Lions", home: "Commanders" },
+  { id: "Steelers vs Chargers", away: "Steelers", home: "Chargers" },
+  { id: "Eagles vs Packers", away: "Eagles", home: "Packers" },
 ];
 
 const TEAM_LOGOS = {
@@ -81,7 +82,7 @@ function updateProgress(){
   $("#err2").classList.remove("show");
 }
 
-const DEADLINE = new Date("2025-10-30T18:35:00"); // fecha y hora límite
+const DEADLINE = new Date("2025-11-06T19:16:00"); // fecha y hora límite
 
 function checkDeadline(){
   const now = new Date();
