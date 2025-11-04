@@ -14,7 +14,7 @@ const GAMES = [
   { id: "Rams vs 49ers", away: "Rams", home: "49ers" },
   { id: "Lions vs Commanders", away: "Lions", home: "Commanders" },
   { id: "Steelers vs Chargers", away: "Steelers", home: "Chargers" },
-  { id: "Eagles vs Packers", away: "Eagles", home: "Packers" },
+  { id: "Eagles vs Packers", away: "Eagles", home: "Packers" }
 ];
 
 const TEAM_LOGOS = {
