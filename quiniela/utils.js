@@ -32,7 +32,7 @@ function closeOverlay(){ $("#overlay")?.classList.remove("show"); }
  * Muestra un overlay y deshabilita interacción. Se levanta solo al llegar la hora.
  * Pasar {hour:15, minute:0, title?, message?}
  */
-function blockPageUntilToday({ hour=15, minute=0, title, message } = {}){
+function blockPageUntilToday({ hour=17, minute=0, title, message } = {}){
   // bypass para pruebas: ?unlock=1
   const params = new URLSearchParams(location.search);
   if (params.get("unlock") === "1") return;
