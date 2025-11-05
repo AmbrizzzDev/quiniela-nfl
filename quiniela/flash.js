@@ -364,13 +364,26 @@ $("#saveFlash").addEventListener("click", async ()=>{
   }
 
   try{
+    // 1) (Opcional) Guardar en Firestore — ya lo tenías
     await flashUserDoc(fullName).set({
       fullName,
       week: CURRENT_WEEK,
       answers: flashAnswers,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
-    // Feedback
+
+    // 2) 🔥 IMPORTANTE: Enviar a Google Sheets (Web App)
+    fetch(WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors', // no esperamos respuesta, solo disparamos
+      body: JSON.stringify({
+        secret: SHARED_SECRET,
+        fullName,
+        week: CURRENT_WEEK,
+        answers: flashAnswers
+      })
+    });
+
     msg.style.display = "none";
     const btn = $("#saveFlash");
     btn.textContent = "¡Guardado!";
