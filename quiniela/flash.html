@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Encuesta Flash – Quiniela NFL</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="card step active" aria-labelledby="t3">
+    <div class="pad" style="display:grid; gap:12px">
+      <div class="topbar">
+        <div>
+          <h1 id="t3">Encuesta Flash</h1>
+          <div class="muted">Jugador: <span id="userName">—</span></div>
+        </div>
+        <div class="week" id="weekLabel">Semana —</div>
+      </div>
+
+      <div class="row" style="gap:8px">
+        <a class="btn secondary" href="index.html">← Volver</a>
+        <button id="resetFlash" class="btn ghost" type="button">Limpiar</button>
+      </div>
+
+      <div class="card" id="flashCard" style="margin-top:6px">
+        <div class="pad" style="display:grid; gap:10px">
+          <p class="muted">Independiente de los picks. Cada acierto vale <strong>+0.5</strong>. Las preguntas con <em>bloqueo</em> impiden que dos jugadores elijan la misma opción.</p>
+          <div id="flashForm" class="flash-form"><!-- render --></div>
+          <div class="row" style="gap:8px">
+            <button id="saveFlash" class="btn primary" type="button">Guardar encuesta</button>
+          </div>
+          <span id="flashMsg" class="err" role="alert" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="app-config.js"></script>
+<script src="utils.js"></script>
+<script src="flash.js"></script>
+</body>
+</html>

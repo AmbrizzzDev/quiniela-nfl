@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Picks – Quiniela NFL</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="card step active" aria-labelledby="t2">
+    <div class="pad" style="display:grid; gap:12px">
+      <div class="topbar">
+        <div>
+          <h1 id="t2">Picks</h1>
+          <div class="muted">Jugador: <span id="userName">—</span></div>
+        </div>
+        <div class="week" id="weekLabel">Semana —</div>
+      </div>
+
+      <div class="row" style="gap:8px">
+        <a class="btn secondary" href="index.html">← Volver</a>
+        <button id="reset" class="btn ghost">Limpiar</button>
+      </div>
+
+      <div id="games"></div>
+
+      <div class="toolbar">
+        <div class="progress"><div id="bar"></div></div>
+        <div class="row" style="justify-content:space-between">
+          <div class="muted"><span id="done">0</span>/<span id="total">0</span> partidos</div>
+        </div>
+        <span id="err2" class="err">Te falta elegir en algunos partidos.</span>
+      </div>
+    </div>
+
+    <!-- Jugada especial -->
+    <div class="infocard" id="specialPickCard" style="margin:14px">
+      <h3 class="ic-title">🎯 Jugada especial</h3>
+      <p class="muted">Elige un partido, predice el ganador y el rango de puntos.</p>
+      <label class="muted">Partido</label>
+      <select id="specialGame" class="btn secondary" style="width:100%">
+        <option value="">Selecciona un partido</option>
+      </select>
+      <div id="specialWinner" class="pick" style="margin-top:10px"></div>
+      <div id="specialRange" class="pick" style="margin-top:10px">
+        <button class="chip" data-range="0-7">0–7 pts</button>
+        <button class="chip" data-range="8-14">8–14 pts</button>
+        <button class="chip" data-range="15-21">15–21 pts</button>
+        <button class="chip" data-range="22+">22+ pts</button>
+      </div>
+    </div>
+
+    <div class="sticky">
+      <button id="save" class="btn primary" type="button" disabled>Guardar picks</button>
+    </div>
+  </section>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="confTitle">
+  <div class="sheet" role="document">
+    <div class="drag"></div>
+    <h2 id="confTitle">¡Guardado con éxito!</h2>
+    <p id="confMsg" class="muted">Tus selecciones han sido registradas.</p>
+    <div class="wrapper">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="index.html">Agregar otra persona</a>
+      <button id="editPicks" class="btn ghost" type="button">Seguir editando</button>
+      <a id="sheetLink" class="btn secondary" href="#" target="_blank" rel="noopener">📊 Ver tabla de la quiniela</a>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="app-config.js"></script>
+<script src="utils.js"></script>
+<script src="data.js"></script>
+<script src="picks.js"></script>
+</body>
+</html>

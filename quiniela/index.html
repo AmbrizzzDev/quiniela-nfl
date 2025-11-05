@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Quiniela NFL</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="card step active" aria-labelledby="t1">
+    <div class="pad" style="display:grid; gap:12px">
+      <div>
+        <h1 id="t1">Quiniela NFL</h1>
+        <div class="muted">Ingresa tus datos para comenzar.</div>
+      </div>
+      <label>
+        <span class="muted">Nombre</span>
+        <input id="nombre" type="text" placeholder="Ej. José" autocomplete="name" required inputmode="text" />
+      </label>
+      <label>
+        <span class="muted">Inicial del apellido</span>
+        <input id="inicial" type="text" placeholder="A - Z" maxlength="1" required inputmode="text" />
+      </label>
+
+      <div class="infocard" aria-label="Instrucciones">
+        <h3 class="ic-title">Instrucciones</h3>
+        <ul class="ic-list">
+          <li>Debes completar todos los partidos para poder guardar.</li>
+          <li>Podrás <strong>modificar</strong> tus selecciones.</li>
+          <li>Los picks cierran a la hora definida por la organización.</li>
+        </ul>
+      </div>
+
+      <div class="row" style="gap:8px">
+        <button id="goPicks" class="btn primary" style="flex:1">Hacer Picks</button>
+        <button id="goFlash" class="btn secondary" style="flex:1">Encuesta Flash</button>
+      </div>
+
+      <span id="err1" class="err">Escribe tu nombre y una sola inicial (A–Z).</span>
+    </div>
+  </section>
+</div>
+
+<!-- No cargamos Firebase aquí -->
+<script src="app-config.js"></script>
+<script>
+  const $ = s => document.querySelector(s);
+
+  function validateAndStore(){
+    const nombre = $("#nombre").value.trim();
+    const ini = $("#inicial").value.trim();
+    const ok = nombre.length >= 2 && /^[a-z]$/i.test(ini);
+    if (!ok) { $("#err1").classList.add("show"); return null; }
+    $("#err1").classList.remove("show");
+    const fullName = `${nombre} ${ini.toUpperCase()}.`;
+    sessionStorage.setItem("userName", fullName);
+    sessionStorage.setItem("week", String(CURRENT_WEEK)); // viene de app-config.js
+    return fullName;
+  }
+
+  $("#goPicks").addEventListener("click", ()=>{
+    const n = validateAndStore(); if (!n) return;
+    window.location.href = "picks.html";
+  });
+  $("#goFlash").addEventListener("click", ()=>{
+    const n = validateAndStore(); if (!n) return;
+    window.location.href = "flash.html";
+  });
+
+  // Autorellena si ya tenías nombre guardado
+  const saved = sessionStorage.getItem("userName");
+  if (saved) {
+    const m = saved.match(/^(.+)\s([A-Z])\.$/);
+    if (m) { $("#nombre").value = m[1]; $("#inicial").value = m[2]; }
+  }
+</script>
+</body>
+</html>
