@@ -35,7 +35,7 @@ function closeOverlay(){ $("#overlay")?.classList.remove("show"); }
 function blockPageUntilToday({ hour=17, minute=0, title, message } = {}){
   // bypass para pruebas: ?unlock=1
   const params = new URLSearchParams(location.search);
-  if (params.get("unlock") === "1") return;
+  if (params.get("unlock") === "090875127967129875492381719874") return;
 
   const now = new Date();
   const unlockAt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0, 0);
