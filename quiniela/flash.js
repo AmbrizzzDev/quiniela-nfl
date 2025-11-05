@@ -4,58 +4,63 @@ const u = requireUserOrRedirect();
 if (!u) throw new Error("No user");
 const fullName = u.fullName;
 
+
 $("#userName").textContent = fullName;
 $("#weekLabel").textContent = `Semana ${CURRENT_WEEK}`;
 
-// ⚡ Configura tus preguntas aquí.
-// Usa blockable: true/false por PREGUNTA.
-// - true: se bloquea a nivel global (nadie más puede elegir la misma opción).
-// - false: no hay bloqueo (ideal para Sí/No, conteos, etc.)
+// --- Kickoff helpers & edit-deadline logic ---
+function _parseKickoff(v){
+  if (!v) return null;
+  const t = new Date(v).getTime();
+  return Number.isFinite(t) ? t : null;
+}
+
+
 const FLASH_QUESTIONS = [
   {
     id: "q1-qb",
     text: "¿Qué quarterback lanzará más yardas esta semana?",
-    blockable: true,   // <<— bloqueable
+    blockable: true,
     type: "select",
     options: [
-      { id: "jackson", label: "Lamar Jackson (Ravens)", kickoff: null },
-      { id: "darnold", label: "Sam Darnold (Seahawks)", kickoff: null },
-      { id: "maye", label: "Drake Maye (Patriots)", kickoff: null },
-      { id: "love", label: "Jordan Love (Packers)", kickoff: null },
-      { id: "jones", label: "Daniel Jones (Colts)", kickoff: null },
-      { id: "herbert", label: "Justin Herbert (Chargers)", kickoff: null },
-      { id: "hurts", label: "Jalen Hurts (Eagles)", kickoff: null },
-      { id: "stafford", label: "Matthew Stafford (Rams)", kickoff: null },
-      { id: "allen", label: "Josh Allen (Bills)", kickoff: null },
-      { id: "stroud", label: "C.J. Stroud (Texans)", kickoff: null },
-      { id: "goff", label: "Jared Goff (Lions)", kickoff: null },
-      { id: "jones", label: "Mac Jones (49ers)", kickoff: null },
-      { id: "mayfield", label: "Baker Mayfield (Buccaneers)", kickoff: null },
-      { id: "dart", label: "Jaxson Dart (Giants)", kickoff: null },
-      { id: "nix", label: "Bo Nix (Broncos)", kickoff: null },
-      { id: "penix", label: "Michael Penix Jr. (Falcons)", kickoff: null },
-      { id: "williams", label: "Caleb Williams (Bears)", kickoff: null },
-      { id: "rodgers", label: "Aaron Rodgers (Steelers)", kickoff: null },
-      { id: "daniels", label: "Jayden Daniels (Commanders)", kickoff: null },
-      { id: "rattler", label: "Spencer Rattler (Saints)", kickoff: null },
-      { id: "young", label: "Bryce Young (Panthers)", kickoff: null },
-      { id: "murray", label: "Kyler Murray (Cardinals)", kickoff: null },
-      { id: "lawrence", label: "Trevor Lawrence (Jaguars)", kickoff: null },
-      { id: "tagovailoa", label: "Tua Tagovailoa (Dolphins)", kickoff: null },
-      { id: "wentz", label: "Carson Wentz (Vikings)", kickoff: null },
-      { id: "smith", label: "Geno Smith (Raiders)", kickoff: null },
-      { id: "fields", label: "Justin Fields (Jets)", kickoff: null },
-      { id: "gabriel", label: "Dillon Gabriel (Browns)", kickoff: null },
+      { id: "jones", label: "Mac Jones (49ers)", kickoff: "2025-11-09T15:25:00" },
+      { id: "williams", label: "Caleb Williams (Bears)", kickoff: "2025-11-09T12:00:00" },
+      { id: "allen", label: "Josh Allen (Bills)", kickoff: "2025-11-09T12:00:00" },
+      { id: "nix", label: "Bo Nix (Broncos)", kickoff: "2025-11-06T19:15:00" },
+      { id: "gabriel", label: "Dillon Gabriel (Browns)", kickoff: "2025-11-09T12:00:00" },
+      { id: "mayfield", label: "Baker Mayfield (Buccaneers)", kickoff: "2025-11-09T12:00:00" },
+      { id: "murray", label: "Kyler Murray (Cardinals)", kickoff: "2025-11-09T15:05:00" },
+      { id: "herbert", label: "Justin Herbert (Chargers)", kickoff: "2025-11-09T19:20:00" },
+      { id: "daniel-jones", label: "Daniel Jones (Colts)", kickoff: "2025-11-09T08:30:00" },
+      { id: "daniels", label: "Jayden Daniels (Commanders)", kickoff: "2025-11-09T15:25:00" },
+      { id: "tagovailoa", label: "Tua Tagovailoa (Dolphins)", kickoff: "2025-11-09T12:00:00" },
+      { id: "hurts", label: "Jalen Hurts (Eagles)", kickoff: "2025-11-10T19:25:00" },
+      { id: "penix", label: "Michael Penix Jr. (Falcons)", kickoff: "2025-11-09T08:30:00" },
+      { id: "dart", label: "Jaxson Dart (Giants)", kickoff: "2025-11-09T12:00:00" },
+      { id: "lawrence", label: "Trevor Lawrence (Jaguars)", kickoff: "2025-11-09T12:00:00" },
+      { id: "fields", label: "Justin Fields (Jets)", kickoff: "2025-11-09T12:00:00" },
+      { id: "goff", label: "Jared Goff (Lions)", kickoff: "2025-11-09T15:25:00" },
+      { id: "love", label: "Jordan Love (Packers)", kickoff: "2025-11-10T19:25:00" },
+      { id: "young", label: "Bryce Young (Panthers)", kickoff: "2025-11-09T12:00:00" },
+      { id: "maye", label: "Drake Maye (Patriots)", kickoff: "2025-11-09T12:00:00" },
+      { id: "smith", label: "Geno Smith (Raiders)", kickoff: "2025-11-06T19:15:00" },
+      { id: "stafford", label: "Matthew Stafford (Rams)", kickoff: "2025-11-09T15:25:00" },
+      { id: "jackson", label: "Lamar Jackson (Ravens)", kickoff: "2025-11-09T12:00:00" },
+      { id: "rattler", label: "Spencer Rattler (Saints)", kickoff: "2025-11-09T12:00:00" },
+      { id: "darnold", label: "Sam Darnold (Seahawks)", kickoff: "2025-11-09T15:05:00" },
+      { id: "rodgers", label: "Aaron Rodgers (Steelers)", kickoff: "2025-11-09T19:20:00" },
+      { id: "stroud", label: "C.J. Stroud (Texans)", kickoff: "2025-11-09T12:00:00" },
+      { id: "wentz", label: "Carson Wentz (Vikings)", kickoff: "2025-11-09T12:00:00" }
     ]
   },
   {
     id: "q2-ot",
     text: "¿Habrá algún partido que se vaya a tiempo extra?",
-    blockable: false,  // <<— NO bloqueable (Sí/No)
+    blockable: false,
     type: "select",
     options: [
-      { id: "si", label: "Sí", kickoff: null },
-      { id: "no", label: "No", kickoff: null }
+      { id: "si", label: "Sí", kickoff: "2025-11-06T19:15:00" },
+      { id: "no", label: "No", kickoff: "2025-11-06T19:15:00" }
     ]
   },
   {
@@ -64,70 +69,70 @@ const FLASH_QUESTIONS = [
     blockable: true,
     type: "select",
     options: [
-      { id: "bills", label: "Buffalo Bills", kickoff: null },
-      { id: "colts", label: "Indianapolis Colts", kickoff: null },
-      { id: "bears", label: "Chicago Bears", kickoff: null },
-      { id: "chargers", label: "Los Angeles Chargers", kickoff: null },
-      { id: "rams", label: "Los Angeles Rams", kickoff: null },
-      { id: "packers", label: "Green Bay Packers", kickoff: null },
-      { id: "seahawks", label: "Seattle Seahawks", kickoff: null },
-      { id: "49ers", label: "San Francisco 49ers", kickoff: null },
-      { id: "lions", label: "Detroit Lions", kickoff: null },
-      { id: "patriots", label: "New England Patriots", kickoff: null },
-      { id: "broncos", label: "Denver Broncos", kickoff: null },
-      { id: "jaguars", label: "Jacksonville Jaguars", kickoff: null },
-      { id: "falcons", label: "Atlanta Falcons", kickoff: null },
-      { id: "commanders", label: "Washington Commanders", kickoff: null },
-      { id: "buccaneers", label: "Tampa Bay Buccaneers", kickoff: null },
-      { id: "giants", label: "New York Giants", kickoff: null },
-      { id: "texans", label: "Houston Texans", kickoff: null },
-      { id: "ravens", label: "Baltimore Ravens", kickoff: null },
-      { id: "cardinals", label: "Arizona Cardinals", kickoff: null },
-      { id: "panthers", label: "Carolina Panthers", kickoff: null },
-      { id: "eagles", label: "Philadelphia Eagles", kickoff: null },
-      { id: "jets", label: "New York Jets", kickoff: null },
-      { id: "vikings", label: "Minnesota Vikings", kickoff: null },
-      { id: "dolphins", label: "Miami Dolphins", kickoff: null },
-      { id: "steelers", label: "Pittsburgh Steelers", kickoff: null },
-      { id: "saints", label: "New Orleans Saints", kickoff: null },
-      { id: "raiders", label: "Las Vegas Raiders", kickoff: null },
-      { id: "browns", label: "Cleveland Browns", kickoff: null },
+      { id: "49ers", label: "San Francisco 49ers", kickoff: "2025-11-09T15:25:00" },
+      { id: "bears", label: "Chicago Bears", kickoff: "2025-11-09T12:00:00" },
+      { id: "bills", label: "Buffalo Bills", kickoff: "2025-11-09T12:00:00" },
+      { id: "broncos", label: "Denver Broncos", kickoff: "2025-11-06T19:15:00" },
+      { id: "browns", label: "Cleveland Browns", kickoff: "2025-11-09T12:00:00" },
+      { id: "buccaneers", label: "Tampa Bay Buccaneers", kickoff: "2025-11-09T12:00:00" },
+      { id: "cardinals", label: "Arizona Cardinals", kickoff: "2025-11-09T15:05:00" },
+      { id: "chargers", label: "Los Angeles Chargers", kickoff: "2025-11-09T19:20:00" },
+      { id: "colts", label: "Indianapolis Colts", kickoff: "2025-11-09T08:30:00" },
+      { id: "commanders", label: "Washington Commanders", kickoff: "2025-11-09T15:25:00" },
+      { id: "dolphins", label: "Miami Dolphins", kickoff: "2025-11-09T12:00:00" },
+      { id: "eagles", label: "Philadelphia Eagles", kickoff: "2025-11-10T19:25:00" },
+      { id: "falcons", label: "Atlanta Falcons", kickoff: "2025-11-09T08:30:00" },
+      { id: "giants", label: "New York Giants", kickoff: "2025-11-09T12:00:00" },
+      { id: "jaguars", label: "Jacksonville Jaguars", kickoff: "2025-11-09T12:00:00" },
+      { id: "jets", label: "New York Jets", kickoff: "2025-11-09T12:00:00" },
+      { id: "lions", label: "Detroit Lions", kickoff: "2025-11-09T15:25:00" },
+      { id: "packers", label: "Green Bay Packers", kickoff: "2025-11-10T19:25:00" },
+      { id: "panthers", label: "Carolina Panthers", kickoff: "2025-11-09T12:00:00" },
+      { id: "patriots", label: "New England Patriots", kickoff: "2025-11-09T12:00:00" },
+      { id: "raiders", label: "Las Vegas Raiders", kickoff: "2025-11-06T19:15:00" },
+      { id: "rams", label: "Los Angeles Rams", kickoff: "2025-11-09T15:25:00" },
+      { id: "ravens", label: "Baltimore Ravens", kickoff: "2025-11-09T12:00:00" },
+      { id: "saints", label: "New Orleans Saints", kickoff: "2025-11-09T12:00:00" },
+      { id: "seahawks", label: "Seattle Seahawks", kickoff: "2025-11-09T15:05:00" },
+      { id: "steelers", label: "Pittsburgh Steelers", kickoff: "2025-11-09T19:20:00" },
+      { id: "texans", label: "Houston Texans", kickoff: "2025-11-09T12:00:00" },
+      { id: "vikings", label: "Minnesota Vikings", kickoff: "2025-11-09T12:00:00" }
     ]
   },
   {
-    id: "q4-team-most-points",
+    id: "q4-rb",
     text: "¿Qué corredor tendrá más yardas terrestres esta semana?",
     blockable: true,
     type: "select",
     options: [
-      { id: "taylor", label: "Jonathan Taylor (Colts)", kickoff: null },
-      { id: "cook", label: "James Cook III (Bills)", kickoff: null },
-      { id: "dowdle", label: "Rico Dowdle (Panthers)", kickoff: null },
-      { id: "dobbins", label: "J.K. Dobbins (Broncos)", kickoff: null },
-      { id: "henry", label: "Derrick Henry (Ravens)", kickoff: null },
-      { id: "achane", label: "De'Von Achane (Dolphins)", kickoff: null },
-      { id: "etienne", label: "Travis Etienne Jr. (Jaguars)", kickoff: null },
-      { id: "mccaffrey", label: "Christian McCaffrey (49ers)", kickoff: null },
-      { id: "robinson", label: "Bijan Robinson (Falcons)", kickoff: null },
-      { id: "williams", label: "Kyren Williams (Rams)", kickoff: null },
-      { id: "hall", label: "Breece Hall (Jets)", kickoff: null },
-      { id: "gibbs", label: "Jahmyr Gibbs (Lions)", kickoff: null },
-      { id: "jacobs", label: "Josh Jacobs (Packers)", kickoff: null },
-      { id: "barkley", label: "Saquon Barkley (Eagles)", kickoff: null },
-      { id: "jeanty", label: "Ashton Jeanty (Raiders)", kickoff: null },
-      { id: "judkins", label: "Quinshon Judkins (Browns)", kickoff: null },
-      { id: "walker", label: "Kenneth Walker III (Seahawks)", kickoff: null },
-      { id: "swift", label: "D'Andre Swift (Bears)", kickoff: null },
-      { id: "croskey-merritt", label: "Jacory Croskey-Merritt (Commanders)", kickoff: null },
-      { id: "singletary", label: "Devin Singletary (Giants)", kickoff: null },
-      { id: "warren", label: "Jaylen Warren (Steelers)", kickoff: null },
-      { id: "montgomery", label: "David Montgomery (Lions)", kickoff: null },
-      { id: "kamara", label: "Alvin Kamara (Saints)", kickoff: null },
-      { id: "chubb", label: "Nick Chubb (Texans)", kickoff: null },
-      { id: "hampton", label: "Omarion Hampton (Chargers)", kickoff: null },
-      { id: "white", label: "Rachaad White (Buccaneers)", kickoff: null },
-      { id: "henderson", label: "Treveyon Henderson (Patriots)", kickoff: null },
-      { id: "emari", label: "Emari Demercado (Cardinals)", kickoff: null },
+      { id: "mccaffrey", label: "Christian McCaffrey (49ers)", kickoff: "2025-11-09T15:25:00" },
+      { id: "swift", label: "D'Andre Swift (Bears)", kickoff: "2025-11-09T12:00:00" },
+      { id: "cook", label: "James Cook III (Bills)", kickoff: "2025-11-09T12:00:00" },
+      { id: "dobbins", label: "J.K. Dobbins (Broncos)", kickoff: "2025-11-06T19:15:00" },
+      { id: "judkins", label: "Quinshon Judkins (Browns)", kickoff: "2025-11-09T12:00:00" },
+      { id: "white", label: "Rachaad White (Buccaneers)", kickoff: "2025-11-09T12:00:00" },
+      { id: "emari", label: "Emari Demercado (Cardinals)", kickoff: "2025-11-09T15:05:00" },
+      { id: "hampton", label: "Omarion Hampton (Chargers)", kickoff: "2025-11-09T19:20:00" },
+      { id: "taylor", label: "Jonathan Taylor (Colts)", kickoff: "2025-11-09T08:30:00" },
+      { id: "croskey-merritt", label: "Jacory Croskey-Merritt (Commanders)", kickoff: "2025-11-09T15:25:00" },
+      { id: "achane", label: "De'Von Achane (Dolphins)", kickoff: "2025-11-09T12:00:00" },
+      { id: "barkley", label: "Saquon Barkley (Eagles)", kickoff: "2025-11-10T19:25:00" },
+      { id: "robinson", label: "Bijan Robinson (Falcons)", kickoff: "2025-11-09T08:30:00" },
+      { id: "singletary", label: "Devin Singletary (Giants)", kickoff: "2025-11-09T12:00:00" },
+      { id: "etienne", label: "Travis Etienne Jr. (Jaguars)", kickoff: "2025-11-09T12:00:00" },
+      { id: "hall", label: "Breece Hall (Jets)", kickoff: "2025-11-09T12:00:00" },
+      { id: "gibbs", label: "Jahmyr Gibbs (Lions)", kickoff: "2025-11-09T15:25:00" },
+      { id: "jacobs", label: "Josh Jacobs (Packers)", kickoff: "2025-11-10T19:25:00" },
+      { id: "dowdle", label: "Rico Dowdle (Panthers)", kickoff: "2025-11-09T12:00:00" },
+      { id: "henderson", label: "Treveyon Henderson (Patriots)", kickoff: "2025-11-09T12:00:00" },
+      { id: "jeanty", label: "Ashton Jeanty (Raiders)", kickoff: "2025-11-06T19:15:00" },
+      { id: "williams", label: "Kyren Williams (Rams)", kickoff: "2025-11-09T15:25:00" },
+      { id: "henry", label: "Derrick Henry (Ravens)", kickoff: "2025-11-09T12:00:00" },
+      { id: "kamara", label: "Alvin Kamara (Saints)", kickoff: "2025-11-09T12:00:00" },
+      { id: "walker", label: "Kenneth Walker III (Seahawks)", kickoff: "2025-11-09T15:05:00" },
+      { id: "warren", label: "Jaylen Warren (Steelers)", kickoff: "2025-11-09T19:20:00" },
+      { id: "chubb", label: "Nick Chubb (Texans)", kickoff: "2025-11-09T12:00:00" },
+      { id: "jones", label: "Aaron Jones SR. (Vikings)", kickoff: "2025-11-09T12:00:00" },
     ]
   }
 ];
@@ -156,6 +161,7 @@ function renderFlashForm(){
       <div class="flash-lock" id="lock-${q.id}" style="${q.blockable ? '' : 'display:none'}"></div>
       <span class="err" id="err-${q.id}" style="display:none"></span>
     `;
+    // (deadline badge removed)
     container.appendChild(card);
 
     const sel = card.querySelector(`#sel-${q.id}`);
@@ -163,9 +169,23 @@ function renderFlashForm(){
     const lockInfo = card.querySelector(`#lock-${q.id}`);
     const err = card.querySelector(`#err-${q.id}`);
 
+
     sel.onchange = async () => {
       err.style.display = "none";
       const optId = sel.value;
+
+      // Prevent changing once your selected game's kickoff has started (per-option lock)
+      const prevAns = flashAnswers[q.id];
+      if (prevAns?.optionId){
+        const prevOpt = (q.options || []).find(o => o.id === prevAns.optionId);
+        const prevKick = _parseKickoff(prevOpt?.kickoff);
+        if (prevKick && Date.now() >= prevKick){
+          err.textContent = "No puedes editar: el partido de tu selección ya comenzó.";
+          err.style.display = "block";
+          sel.value = prevAns.optionId; // revert to previous
+          return;
+        }
+      }
 
       // Mostrar/ocultar input Otro
       if (oth) {
@@ -183,6 +203,7 @@ function renderFlashForm(){
 
       // Kickoff opcional por opción
       const opt = (q.options || []).find(o => o.id === optId);
+
       if (opt?.kickoff) {
         const now = Date.now();
         const ko = new Date(opt.kickoff).getTime();
@@ -212,6 +233,15 @@ function renderFlashForm(){
       if (optId === "otro" && oth) {
         flashAnswers[q.id].otherText = (oth.value || "").trim();
       }
+      // If during interaction the selected kickoff is reached, freeze this question
+      setTimeout(() => {
+        const current = (q.options || []).find(o => o.id === (flashAnswers[q.id]?.optionId));
+        const lockAt = _parseKickoff(current?.kickoff);
+        if (lockAt && Date.now() >= lockAt){
+          sel.disabled = true;
+          if (oth) oth.disabled = true;
+        }
+      }, 0);
     };
   });
 
@@ -230,6 +260,20 @@ function renderFlashForm(){
         if (oth && ans.optionId==="otro"){
           oth.style.display = "block";
           oth.value = ans.otherText || "";
+        }
+        // Freeze if the saved selection's kickoff already passed
+        if (sel && ans?.optionId){
+          const prevOpt = (q.options || []).find(o => o.id === ans.optionId);
+          const prevKick = _parseKickoff(prevOpt?.kickoff);
+          if (prevKick && Date.now() >= prevKick){
+            sel.disabled = true;
+            if (oth) oth.disabled = true;
+            const errEl = document.getElementById(`err-${q.id}`);
+            if (errEl){
+              errEl.textContent = "Esta pregunta ya no se puede editar: tu selección ya empezó.";
+              errEl.style.display = "block";
+            }
+          }
         }
       });
     }catch(e){ console.warn(e); }

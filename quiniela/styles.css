@@ -104,3 +104,32 @@ input[type=text]:focus{outline:none;border-color:#344368;box-shadow:0 0 0 3px rg
 .closed-message{background:#121318;border:2px solid #ff6b6b;border-radius:16px;padding:24px;text-align:center;margin:20px;}
 .closed-message h1{font-size:22px;margin-bottom:10px;color:#ff6b6b}
 .closed-message p{color:#9aa3b2;font-size:16px;margin:0}
+
+/* --- Bloqueo global hasta hora --- */
+.site-blocker{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.75);
+  display: none; z-index: 3000; /* > 1000 del otro overlay */
+  color: #eef1f6;
+  backdrop-filter: blur(2px);
+  align-items: center; justify-content: center;
+  pointer-events: auto;
+}
+.site-blocker.show{ display:flex; }
+
+/* Usamos .panel para no chocar con .sheet del overlay de guardado */
+.site-blocker .panel{
+  background: #121318;
+  border: 1px solid #232a3c;
+  border-radius: 16px;
+  padding: 18px;
+  max-width: 560px;
+  width: min(92vw, 560px);
+  text-align: center;
+  /* ¡clave! evitar transform heredado: */
+  transform: none !important;
+  position: static !important;
+}
+.site-blocker h2{ margin: 0 0 6px; font-size: 20px; }
+.site-blocker p{ margin: 0; color: #aab2c7; }
+.site-blocker .time{ font-weight: 800; }
