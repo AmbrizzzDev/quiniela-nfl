@@ -59,8 +59,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "si", label: "Sí", kickoff: "2025-11-06T19:15:00" },
-      { id: "no", label: "No", kickoff: "2025-11-06T19:15:00" }
+      { id: "Sí", label: "Sí", kickoff: "2025-11-06T19:15:00" },
+      { id: "No", label: "No", kickoff: "2025-11-06T19:15:00" }
     ]
   },
   {
