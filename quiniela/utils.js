@@ -44,15 +44,26 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.innerHTML = `
-    <div class="panel">
-      <h2>${title || "Abrimos pronto ⏳"}</h2>
-      <p>${message || "Esta página se habilitará el"} 
-      <p class="muted" style="margin-top:8px">
-        Si ya es la hora y sigue este mensaje, recarga la página.
+  <div class="gate-panel">
+    <div class="gate-header">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="gate-icon">
+        <path d="M12 2a7 7 0 0 1 7 7v2h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5v2h10V9a5 5 0 0 0-5-5zM4 13v7h16v-7H4z"/>
+      </svg>
+      <h2 class="gate-title">${title || "Bloqueado temporalmente"}</h2>
+      <p class="gate-sub">
+        ${message || "Disponible el"} <span class="date"></span> — <span class="time"></span>
       </p>
-      <button id="backToIndex" class="btn-back">Volver al inicio</button>
     </div>
-  `;
+
+    <div class="gate-actions">
+      <a id="backToIndex" class="gate-btn" href="index.html" role="button">
+        Volver al inicio
+      </a>
+    </div>
+
+    <p class="gate-note">Si ya es la hora y ves este mensaje, refresca la página.</p>
+  </div>
+`;
   document.body.appendChild(overlay);
 
   // Formatea fecha y hora locales
@@ -60,11 +71,15 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
   const fmtTime = new Intl.DateTimeFormat([], { hour:"2-digit", minute:"2-digit" });
   overlay.querySelector(".date").textContent = fmtDate.format(unlockAt);
   overlay.querySelector(".time").textContent = fmtTime.format(unlockAt);
-
-  overlay.querySelector("#backToIndex").addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
   
+  const back = overlay.querySelector("#backToIndex");
+  back.addEventListener("click", (e) => {
+    e.preventDefault();
+    const path = location.pathname || "";
+    if (/\/index\.html?$|\/$/.test(path)) { location.reload(); return; }
+    location.replace(new URL("index.html", location.href).href);
+  });
+
   // Bloquea scroll
   const prevOverflow = document.documentElement.style.overflow;
   document.documentElement.style.overflow = "hidden";
