@@ -51,7 +51,7 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
       </svg>
       <h2 class="gate-title">${title || "Bloqueado temporalmente"}</h2>
       <p class="gate-sub">
-        ${message || "Disponible el"} <span class="date"></span> — <span class="time"></span>
+        ${message || "Disponible el"}
       </p>
     </div>
 
@@ -71,7 +71,7 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
   const fmtTime = new Intl.DateTimeFormat([], { hour:"2-digit", minute:"2-digit" });
   overlay.querySelector(".date").textContent = fmtDate.format(unlockAt);
   overlay.querySelector(".time").textContent = fmtTime.format(unlockAt);
-  
+
   const back = overlay.querySelector("#backToIndex");
   back.addEventListener("click", (e) => {
     e.preventDefault();
