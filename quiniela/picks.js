@@ -164,7 +164,7 @@ renderSpecialPick();
         const g = GAMES.find(x => x.id === p.id);
         if (!g) return;
         const side = p.winner === g.away ? "away" :
-                     p.winner === g.home ? "home" : "tie";
+        p.winner === g.home ? "home" : "tie";
         picks.set(g.id, side);
       });
       if (data.specialPick){
@@ -243,5 +243,9 @@ $("#editPicks").addEventListener("click", ()=> closeOverlay());
 document.getElementById("overlay")?.addEventListener("click", (e)=>{
   if (e.target.id === "overlay") closeOverlay();
 });
+$("#gotoencflash").addEventListener("click", ()=>{
+  window.location.href = "flash.html";
+});
+
 window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") closeOverlay(); });
 $("#reset").addEventListener("click", ()=>{ picks.clear(); renderGames(); });
