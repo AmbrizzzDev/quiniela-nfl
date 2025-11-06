@@ -61,6 +61,10 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
   overlay.querySelector(".date").textContent = fmtDate.format(unlockAt);
   overlay.querySelector(".time").textContent = fmtTime.format(unlockAt);
 
+  overlay.querySelector("#backToIndex").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+  
   // Bloquea scroll
   const prevOverflow = document.documentElement.style.overflow;
   document.documentElement.style.overflow = "hidden";
