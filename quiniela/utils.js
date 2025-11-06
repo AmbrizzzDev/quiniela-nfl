@@ -27,21 +27,16 @@ function checkDeadlineAndMaybeBlock(){
 function openOverlay(){ $("#overlay")?.classList.add("show"); }
 function closeOverlay(){ $("#overlay")?.classList.remove("show"); }
 
-/**
- * Bloquea toda la página hasta hoy a las HH:MM (hora local).
- * Muestra un overlay y deshabilita interacción. Se levanta solo al llegar la hora.
- * Pasar {hour:15, minute:0, title?, message?}
- */
-function blockPageUntilToday({ hour=17, minute=0, title, message } = {}){
-  // bypass para pruebas: ?unlock=1
-  const params = new URLSearchParams(location.search);
-  if (params.get("unlock") === "090875127967129875492381719874") return;
+// 🕒 Bloquea la página hasta una fecha y hora local exacta
+function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message }) {
+  // Permitir acceso manual con ?unlock=1
+  if (new URLSearchParams(location.search).get("unlock") === "1") return;
 
-  const now = new Date();
-  const unlockAt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0, 0);
+  // Construye fecha local
+  const unlockAt = new Date(year, month - 1, day, hour, minute, 0, 0);
 
   // Si ya pasó, no bloquees
-  if (now >= unlockAt) return;
+  if (Date.now() >= unlockAt.getTime()) return;
 
   // Crea overlay
   const overlay = document.createElement("div");
@@ -49,30 +44,32 @@ function blockPageUntilToday({ hour=17, minute=0, title, message } = {}){
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.innerHTML = `
-  <div class="panel">
-    <h2>${title || "Abrimos más tarde ⏳"}</h2>
-    <p>${message || "Esta página se habilitará a las"} <span class="time"></span> de hoy.</p>
-    <p style="margin-top:8px" class="muted">Si ves este mensaje después de la hora, intenta recargar.</p>
-  </div>
-`;
+    <div class="panel">
+      <h2>${title || "Abrimos pronto ⏳"}</h2>
+      <p>${message || "Esta página se habilitará el"} 
+      <p class="muted" style="margin-top:8px">
+        Si ya es la hora y sigue este mensaje, recarga la página.
+      </p>
+    </div>
+  `;
   document.body.appendChild(overlay);
 
-  // Muestra hora destino formateada
-  const fmt = new Intl.DateTimeFormat([], { hour:'2-digit', minute:'2-digit' });
-  overlay.querySelector(".time").textContent = fmt.format(unlockAt);
+  // Formatea fecha y hora locales
+  const fmtDate = new Intl.DateTimeFormat([], { weekday:"short", day:"2-digit", month:"short" });
+  const fmtTime = new Intl.DateTimeFormat([], { hour:"2-digit", minute:"2-digit" });
+  overlay.querySelector(".date").textContent = fmtDate.format(unlockAt);
+  overlay.querySelector(".time").textContent = fmtTime.format(unlockAt);
 
-  // Evitar scroll/interacción detrás
+  // Bloquea scroll
   const prevOverflow = document.documentElement.style.overflow;
   document.documentElement.style.overflow = "hidden";
 
-  // Timer para levantar el bloqueo en cuanto llegue la hora
-  const tick = () => {
-    if (Date.now() >= unlockAt.getTime()){
-      overlay.classList.remove("show");
+  // Quita overlay cuando llegue la hora
+  const int = setInterval(() => {
+    if (Date.now() >= unlockAt.getTime()) {
+      clearInterval(int);
       overlay.remove();
       document.documentElement.style.overflow = prevOverflow || "";
-      clearInterval(int);
     }
-  };
-  const int = setInterval(tick, 1000);
+  }, 1000);
 }
