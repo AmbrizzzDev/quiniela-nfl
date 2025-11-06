@@ -27,9 +27,9 @@ function checkDeadlineAndMaybeBlock(){
 function openOverlay(){ $("#overlay")?.classList.add("show"); }
 function closeOverlay(){ $("#overlay")?.classList.remove("show"); }
 
-// 🕒 Bloquea la página hasta una fecha y hora local exacta
+//* Bloqueo de pagina
 function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message }) {
-  // Permitir acceso manual con ?unlock=1
+  // Permitir acceso manual
   if (new URLSearchParams(location.search).get("unlock") === "1") return;
 
   // Construye fecha local
