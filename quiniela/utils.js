@@ -50,6 +50,7 @@ function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message
       <p class="muted" style="margin-top:8px">
         Si ya es la hora y sigue este mensaje, recarga la página.
       </p>
+      <button id="backToIndex" class="btn-back">Volver al inicio</button>
     </div>
   `;
   document.body.appendChild(overlay);
