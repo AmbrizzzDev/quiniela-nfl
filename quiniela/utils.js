@@ -11,6 +11,7 @@ function requireUserOrRedirect(){
 }
 
 function checkDeadlineAndMaybeBlock(){
+  if (window.SKIP_GLOBAL_GATE) return;
   const now = new Date();
   if (now >= DEADLINE){
     document.body.innerHTML = `
