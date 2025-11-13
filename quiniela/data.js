@@ -1,20 +1,20 @@
 // Lista de juegos (ejemplo)
 const GAMES = [
-  { id: "Patriots vs Jets", away: "Patriots", home: "Jets" },
-  { id: "Dolphins vs Commander", away: "Dolphins", home: "Commanders" },
-  { id: "Giants vs Packers", away: "Giants", home: "Packers" },
-  { id: "Titans vs Texans", away: "Titans", home: "Texans" },
-  { id: "Falcons vs Panthers", away: "Falcons", home: "Panthers" },
-  { id: "Vikings vs Bears", away: "Vikings", home: "Bears" },
-  { id: "Jaguars vs Chargers", away: "Jaguars", home: "Chargers" },
-  { id: "Bills vs Buccaneers", away: "Bills", home: "Buccaneers" },
-  { id: "Steelers vs Bengals", away: "Steelers", home: "Bengals" },
-  { id: "Cardinals vs 49ers", away: "Cardinals", home: "49ers" },
-  { id: "Rams vs Seahawks", away: "Rams", home: "Seahawks" },
-  { id: "Broncos vs Chiefs", away: "Broncos", home: "Chiefs" },
-  { id: "Browns vs Ravens", away: "Browns", home: "Ravens" },
-  { id: "Eagles vs Lions", away: "Eagles", home: "Lions" },
-  { id: "Raiders vs Cowboys", away: "Raiders", home: "Cowboys" },
+  { id: "Jets vs Patriots", home: "Patriots", away: "Jets" },
+  { id: "Commanders vs Dolphins", home: "Dolphins", away: "Commanders" },
+  { id: "Packers vs Giants", home: "Giants", away: "Packers" },
+  { id: "Texans vs Titans", home: "Titans", away: "Texans" },
+  { id: "Panthers vs Falcons", home: "Falcons", away: "Panthers" },
+  { id: "Bears vs Vikings", home: "Vikings", away: "Bears" },
+  { id: "Chargers vs Jaguars", home: "Jaguars", away: "Chargers" },
+  { id: "Buccaneers vs Bills", home: "Bills", away: "Buccaneers" },
+  { id: "Bengals vs Steelers", home: "Steelers", away: "Bengals" },
+  { id: "49ers vs Cardinals", home: "Cardinals", away: "49ers" },
+  { id: "Seahawks vs Rams", home: "Rams", away: "Seahawks" },
+  { id: "Chiefs vs Broncos", home: "Broncos", away: "Chiefs" },
+  { id: "Ravens vs Browns", home: "Browns", away: "Ravens" },
+  { id: "Lions vs Eagles", home: "Eagles", away: "Lions" },
+  { id: "Cowboys vs Raiders", home: "Raiders", away: "Cowboys" }
 ];
 
 const TEAM_LOGOS = {
