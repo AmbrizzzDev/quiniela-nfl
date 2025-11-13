@@ -62,8 +62,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-11-06T19:15:00" },
-      { id: "No", label: "No", kickoff: "2025-11-06T19:15:00" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   },
   {
@@ -72,34 +72,34 @@ const FLASH_QUESTIONS = [
     blockable: true,
     type: "select",
     options: [
-      { id: "49ers", label: "San Francisco 49ers", kickoff: "2025-11-09T15:25:00" },
-      { id: "Bears", label: "Chicago Bears", kickoff: "2025-11-09T12:00:00" },
-      { id: "Bills", label: "Buffalo Bills", kickoff: "2025-11-09T12:00:00" },
-      { id: "Broncos", label: "Denver Broncos", kickoff: "2025-11-06T19:15:00" },
-      { id: "Browns", label: "Cleveland Browns", kickoff: "2025-11-09T12:00:00" },
-      { id: "Buccaneers", label: "Tampa Bay Buccaneers", kickoff: "2025-11-09T12:00:00" },
-      { id: "Cardinals", label: "Arizona Cardinals", kickoff: "2025-11-09T15:05:00" },
-      { id: "Chargers", label: "Los Angeles Chargers", kickoff: "2025-11-09T19:20:00" },
-      { id: "Colts", label: "Indianapolis Colts", kickoff: "2025-11-09T08:30:00" },
-      { id: "Commanders", label: "Washington Commanders", kickoff: "2025-11-09T15:25:00" },
-      { id: "Dolphins", label: "Miami Dolphins", kickoff: "2025-11-09T12:00:00" },
-      { id: "Eagles", label: "Philadelphia Eagles", kickoff: "2025-11-10T19:25:00" },
-      { id: "Falcons", label: "Atlanta Falcons", kickoff: "2025-11-09T08:30:00" },
-      { id: "Giants", label: "New York Giants", kickoff: "2025-11-09T12:00:00" },
-      { id: "Jaguars", label: "Jacksonville Jaguars", kickoff: "2025-11-09T12:00:00" },
-      { id: "Jets", label: "New York Jets", kickoff: "2025-11-09T12:00:00" },
-      { id: "Lions", label: "Detroit Lions", kickoff: "2025-11-09T15:25:00" },
-      { id: "Packers", label: "Green Bay Packers", kickoff: "2025-11-10T19:25:00" },
-      { id: "Panthers", label: "Carolina Panthers", kickoff: "2025-11-09T12:00:00" },
-      { id: "Patriots", label: "New England Patriots", kickoff: "2025-11-09T12:00:00" },
-      { id: "Raiders", label: "Las Vegas Raiders", kickoff: "2025-11-06T19:15:00" },
-      { id: "Rams", label: "Los Angeles Rams", kickoff: "2025-11-09T15:25:00" },
-      { id: "Ravens", label: "Baltimore Ravens", kickoff: "2025-11-09T12:00:00" },
-      { id: "Saints", label: "New Orleans Saints", kickoff: "2025-11-09T12:00:00" },
-      { id: "Seahawks", label: "Seattle Seahawks", kickoff: "2025-11-09T15:05:00" },
-      { id: "Steelers", label: "Pittsburgh Steelers", kickoff: "2025-11-09T19:20:00" },
-      { id: "Texans", label: "Houston Texans", kickoff: "2025-11-09T12:00:00" },
-      { id: "Vikings", label: "Minnesota Vikings", kickoff: "2025-11-09T12:00:00" }
+      { id: "49ers", label: "San Francisco 49ers", kickoff: null },
+      { id: "Bears", label: "Chicago Bears", kickoff: null },
+      { id: "Bills", label: "Buffalo Bills", kickoff: null },
+      { id: "Broncos", label: "Denver Broncos", kickoff: null },
+      { id: "Browns", label: "Cleveland Browns", kickoff: null },
+      { id: "Buccaneers", label: "Tampa Bay Buccaneers", kickoff: null },
+      { id: "Cardinals", label: "Arizona Cardinals", kickoff: null },
+      { id: "Chargers", label: "Los Angeles Chargers", kickoff: null },
+      { id: "Colts", label: "Indianapolis Colts", kickoff: null },
+      { id: "Commanders", label: "Washington Commanders", kickoff: null },
+      { id: "Dolphins", label: "Miami Dolphins", kickoff: null },
+      { id: "Eagles", label: "Philadelphia Eagles", kickoff: null },
+      { id: "Falcons", label: "Atlanta Falcons", kickoff: null },
+      { id: "Giants", label: "New York Giants", kickoff: null },
+      { id: "Jaguars", label: "Jacksonville Jaguars", kickoff: null },
+      { id: "Jets", label: "New York Jets", kickoff: null },
+      { id: "Lions", label: "Detroit Lions", kickoff: null },
+      { id: "Packers", label: "Green Bay Packers", kickoff: null },
+      { id: "Panthers", label: "Carolina Panthers", kickoff: null },
+      { id: "Patriots", label: "New England Patriots", kickoff: null },
+      { id: "Raiders", label: "Las Vegas Raiders", kickoff: null },
+      { id: "Rams", label: "Los Angeles Rams", kickoff: null },
+      { id: "Ravens", label: "Baltimore Ravens", kickoff: null },
+      { id: "Saints", label: "New Orleans Saints", kickoff: null },
+      { id: "Seahawks", label: "Seattle Seahawks", kickoff: null },
+      { id: "Steelers", label: "Pittsburgh Steelers", kickoff: null },
+      { id: "Texans", label: "Houston Texans", kickoff: null },
+      { id: "Vikings", label: "Minnesota Vikings", kickoff: null }
     ]
   },
   {
@@ -108,8 +108,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-11-06T19:15:00" },
-      { id: "No", label: "No", kickoff: "2025-11-06T19:15:00" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   }
 ];
