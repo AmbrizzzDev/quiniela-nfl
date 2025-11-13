@@ -37,6 +37,6 @@ function flashLockDoc(qId, optId, week = CURRENT_WEEK){
   return db.doc(`events/${EVENT_ID}/weeks/${week}/flashLocks/${qId}/options/${optId}`);
 }
 
-//* Conexion al sheet
+//! Conexion al script de Google Apps Script
 const WEB_APP_URL   = 'https://script.google.com/macros/s/AKfycbwkcOOvxchu6ZdLI77OfVI_3e7q-5KrR9sZoIl_ur_rrFnL2qUEf3SzR9jtWyUMXQk0/exec';
 const SHARED_SECRET = 'quiniela-picks';

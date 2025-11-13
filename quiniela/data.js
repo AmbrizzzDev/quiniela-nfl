@@ -1,4 +1,4 @@
-// Lista de juegos (ejemplo)
+//* Lista de juegos
 const GAMES = [
   { id: "Jets vs Patriots", home: "Patriots", away: "Jets" },
   { id: "Commanders vs Dolphins", home: "Dolphins", away: "Commanders" },
@@ -17,6 +17,7 @@ const GAMES = [
   { id: "Cowboys vs Raiders", home: "Raiders", away: "Cowboys" }
 ];
 
+//! Logos de equipos
 const TEAM_LOGOS = {
   "Cowboys":"https://a.espncdn.com/i/teamlogos/nfl/500/dal.png",
   "Giants":"https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
