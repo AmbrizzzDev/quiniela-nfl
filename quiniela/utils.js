@@ -31,7 +31,7 @@ function closeOverlay(){ $("#overlay")?.classList.remove("show"); }
 //* Bloqueo de pagina
 function blockPageUntil({ year, month, day, hour = 0, minute = 0, title, message }) {
   // Permitir acceso manual
-  if (new URLSearchParams(location.search).get("unlock") === "1") return;
+  if (new URLSearchParams(location.search).get("unlock") === "09712B4HJ234Ggjhgda38GHJD") return;
 
   // Construye fecha local
   const unlockAt = new Date(year, month - 1, day, hour, minute, 0, 0);
