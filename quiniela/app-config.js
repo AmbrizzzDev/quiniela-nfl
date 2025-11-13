@@ -38,5 +38,5 @@ function flashLockDoc(qId, optId, week = CURRENT_WEEK){
 }
 
 //* Conexion al sheet
-const WEB_APP_URL   = 'https://script.google.com/macros/s/AKfycbz2wM5MZNizXIt-A_q_bU9TQC7f16Qo4kMyTH1W6lutRrezJni7dXZGaGxH31OqJ6J-/exec';
+const WEB_APP_URL   = 'https://script.google.com/macros/s/AKfycbwkcOOvxchu6ZdLI77OfVI_3e7q-5KrR9sZoIl_ur_rrFnL2qUEf3SzR9jtWyUMXQk0/exec';
 const SHARED_SECRET = 'quiniela-picks';
