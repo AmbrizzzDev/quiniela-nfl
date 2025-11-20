@@ -4,6 +4,16 @@
 const SCOREBOARD_URL =
   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
 
+// --- Admin por URL ---
+const RESULTS_ADMIN_PARAM  = "admin";        // ?admin=...
+const RESULTS_ADMIN_VALUE  = "787326495108273501";
+
+function isResultsAdminFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const val = params.get(RESULTS_ADMIN_PARAM);
+  return val && val === RESULTS_ADMIN_VALUE;
+}
+
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
   { id: "q1",          label: "Flash 1 – ----" },
@@ -799,7 +809,9 @@ async function loadResultsPage() {
   root.innerHTML = ""; // limpiar "Cargando..."
 
   // panel admin
-  renderExtrasAdmin(extrasMeta, players);
+  if (isResultsAdminFromUrl()) {
+    renderExtrasAdmin(extrasMeta, players);
+  }
 
   // ESPN winners
   const events = await fetchEventsFromEspn();
@@ -840,7 +852,7 @@ function buildResultsTable(players, games, winnersByKey, extrasMeta) {
 
   // Columna de la izquierda
   const thName = document.createElement("th");
-  thName.textContent = "Partidos / Jugadores";
+  thName.textContent = "Jugadores";
   hRow.appendChild(thName);
 
   // Una sola columna por jugador: nombre + # dentro
