@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados Quiniela</title>
+  <link rel="stylesheet" href="tablapicks.css">
+</head>
+
+<body class="results-page">
+<body class="results-wrapper">
+    <h1 class="results-title">Resultados semana <span id="weekLabel"></span></h1>
+    <div class="results-subtitle">Tabla de picks</div>
+     <button id="btnDownloadPng"
+          style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);
+                 background:rgba(15,23,42,.9);color:#e5e7eb;font-size:12px;cursor:pointer;">
+    Guardar tabla en PNG
+  </button>
+
+    <div class="results-legend">
+      <div class="badge badge-win">✔ Acierto</div>
+      <div class="badge badge-lose">✖ Error</div>
+      <div class="badge badge-empty">— Sin marcador</div>
+    </div>
+
+    <div id="resultsRoot"></div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="app-config.js"></script>
+<script src="utils.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="results.js"></script>
+</body>
+</html>

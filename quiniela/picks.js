@@ -246,6 +246,9 @@ document.getElementById("overlay")?.addEventListener("click", (e)=>{
 $("#gotoencflash").addEventListener("click", ()=>{
   window.location.href = "flash.html";
 });
+$("#gototable").addEventListener("click", ()=>{
+  window.location.href = "tablapicks.html";
+});
 
 window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") closeOverlay(); });
 $("#reset").addEventListener("click", ()=>{ picks.clear(); renderGames(); });
