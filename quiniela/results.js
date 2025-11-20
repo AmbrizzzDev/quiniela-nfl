@@ -830,19 +830,27 @@ function buildResultsTable(players, games, winnersByKey, extrasMeta) {
 
   const table = document.createElement("table");
 
+  if (sortedPlayers.length === 1) {
+    table.classList.add("single-player-table");
+  }
+
   // --- header ---
   const thead = document.createElement("thead");
   const hRow = document.createElement("tr");
 
+  // Columna de la izquierda
   const thName = document.createElement("th");
-  thName.textContent = "Jugadores";
+  thName.textContent = "Partidos / Jugadores";
   hRow.appendChild(thName);
 
+  // Una sola columna por jugador: nombre + # dentro
   sortedPlayers.forEach((p, idx) => {
     const th = document.createElement("th");
     th.innerHTML = `
-      <span style="font-size:11px;opacity:.7;">#${idx + 1}</span><br>
-      <span class="player-name">${p.name}</span>
+      <div class="player-header">
+        <span class="player-name">${p.name}</span>
+        <span class="player-rank">#${idx + 1}</span>
+      </div>
     `;
     hRow.appendChild(th);
   });
