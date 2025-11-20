@@ -32,14 +32,42 @@ function gameItem(g){
 
   const teams = document.createElement("div");
   teams.className = "teams";
+
   const away = document.createElement("div");
   away.className = "team";
-  away.innerHTML = `${teamLogo(g.away) ? `<img class="logo-img" src="${teamLogo(g.away)}" alt="${g.away} logo" loading="lazy">` : `<div class="logo">${initials(g.away)}</div>`}<div class="name">${g.away}</div>`;
+  away.innerHTML = `
+    ${teamLogo(g.away)
+      ? `<img class="logo-img" src="${teamLogo(g.away)}" alt="${g.away} logo" loading="lazy">`
+      : `<div class="logo">${initials(g.away)}</div>`
+    }
+    <div class="name">
+      <span class="material-symbols-outlined">
+        flight_takeoff
+      </span>
+      ${g.away}
+    </div>
+  `;
+
   const mid  = document.createElement("div");
-  mid.className="vs"; mid.textContent="VS";
+  mid.className="vs"; 
+  mid.textContent="VS";
+
+
   const home = document.createElement("div");
   home.className = "team";
-  home.innerHTML = `<div class="name">${g.home}</div>${teamLogo(g.home) ? `<img class="logo-img" src="${teamLogo(g.home)}" alt="${g.home} logo" loading="lazy">` : `<div class="logo">${initials(g.home)}</div>`}`;
+  home.innerHTML = `
+    <div class="name">
+      ${g.home}
+      <span class="material-symbols-outlined">
+        home
+      </span>
+    </div>
+    ${teamLogo(g.home)
+      ? `<img class="logo-img" src="${teamLogo(g.home)}" alt="${g.home} logo" loading="lazy">`
+      : `<div class="logo">${initials(g.home)}</div>`
+    }
+  `;
+
   teams.append(away, mid, home);
 
   const pick = document.createElement("div"); 

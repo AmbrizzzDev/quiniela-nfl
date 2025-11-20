@@ -181,3 +181,31 @@ input[type=text]:focus{outline:none;border-color:#344368;box-shadow:0 0 0 3px rg
   font-size: 12px;
   color: #8f97aa;
 }
+
+/* Iconos de local/visitante en la página de picks */
+.team .name {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.team-role-icon {
+  font-size: 12px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.35));
+}
+
+.away-icon {
+  order: -1; /* iconito antes del nombre si algún layout lo invierte */
+}
+
+.home-icon {
+  /* por si luego quieres diferenciar estilos del local */
+}
+
+.team-role-icon {
+  opacity: 0.85;
+  margin: 0 4px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.35));
+  font-size: 18px !important;
+}
