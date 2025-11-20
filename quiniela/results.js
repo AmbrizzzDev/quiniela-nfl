@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "Flash 1 – ----" },
-  { id: "q2",     label: "Flash 2 – ----" },
-  { id: "q3", label: "Flash 3 – ----" },
-  { id: "q4",       label: "Flash 4 – ----" }
+  { id: "q1",          label: "----" },
+  { id: "q2",          label: "----" },
+  { id: "q3",          label: "----" },
+  { id: "q4",          label: "----" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
