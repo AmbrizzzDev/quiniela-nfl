@@ -6,10 +6,10 @@ const SCOREBOARD_URL =
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1-k",          label: "Flash 1 – Kicker con más puntos" },
-  { id: "q2-200yds",     label: "Flash 2 – ¿Habrá jugador +200yds tierra?" },
-  { id: "q3-team-sacks", label: "Flash 3 – Equipo con más sacks" },
-  { id: "q4-td-d",       label: "Flash 4 – ¿Habrá touchdown defensivo?" }
+  { id: "q1",          label: "Flash 1 – ----" },
+  { id: "q2",     label: "Flash 2 – ----" },
+  { id: "q3", label: "Flash 3 – ----" },
+  { id: "q4",       label: "Flash 4 – ----" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
