@@ -404,3 +404,7 @@ $("#resetFlash").addEventListener("click", async ()=>{
   flashAnswers = {};
   renderFlashForm();
 });
+
+$("#gototable").addEventListener("click", ()=>{
+  window.location.href = "tablapicks.html";
+});
