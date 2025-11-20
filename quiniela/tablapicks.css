@@ -360,3 +360,6 @@ body {
 .single-player-table th:first-child {
   text-align: left;
 }
+
+.btn.secondary{background:#1a2130; color:var(--text); border:1px solid #27304a}
+.row{display:flex; gap:10px; align-items:center}
