@@ -410,43 +410,39 @@ async function fetchEventsFromEspn() {
 function matchGameLabelToEvent(label, events) {
   if (!label || !events || !events.length) return null;
 
-  const parts = String(label).split(/vs|VS|Vs/);
+  const clean = s => String(s).trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+  // split permisivo
+  const parts = label.split(/vs|VS|Vs|\s+v\s+/i);
   if (parts.length < 2) return null;
 
-  const left = parts[0].trim();
-  const right = parts[1].trim();
-
-  const leftN = normTeam(left);
-  const rightN = normTeam(right);
+  const left = clean(parts[0]);
+  const right = clean(parts[1]);
 
   let best = null;
   let bestScore = 0;
 
   for (const ev of events) {
-    const awayN = normTeam(ev.awayShort);
-    const homeN = normTeam(ev.homeShort);
-    const awayAbbr = normTeam(ev.awayAbbr);
-    const homeAbbr = normTeam(ev.homeAbbr);
-    const awayFullN = normTeam(ev.awayFull);
-    const homeFullN = normTeam(ev.homeFull);
-
-    const awaySet = new Set([awayN, awayAbbr, awayFullN]);
-    const homeSet = new Set([homeN, homeAbbr, homeFullN]);
+    const away = clean(ev.awayShort) || clean(ev.awayAbbr) || clean(ev.awayFull);
+    const home = clean(ev.homeShort) || clean(ev.homeAbbr) || clean(ev.homeFull);
 
     let score = 0;
-    if (awaySet.has(leftN)) score += 2;
-    if (homeSet.has(rightN)) score += 2;
-    if (homeSet.has(leftN)) score += 1;
-    if (awaySet.has(rightN)) score += 1;
+
+    if (left === away) score += 3;
+    if (right === home) score += 3;
+
+    // permitir matching cruzado por si el label está invertido
+    if (left === home) score += 1;
+    if (right === away) score += 1;
 
     if (score > bestScore) {
-      bestScore = score;
       best = ev;
+      bestScore = score;
     }
   }
 
-  if (!best || bestScore < 3) {
-    console.warn("⚠️ No se encontró match claro para", label);
+  if (!best) {
+    console.warn("⚠ No match para:", label);
     return null;
   }
 
