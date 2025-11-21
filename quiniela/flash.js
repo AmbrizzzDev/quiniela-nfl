@@ -23,10 +23,10 @@ const FLASH_QUESTIONS = [
     blockable: true,
     type: "select",
     options: [
-    { id: "B. Purdy",       label: "Brock Purdy (49ers)", kickoff: null },
+    { id: "B. Purdy",       label: "Brock Purdy (49ers)", kickoff: "2025-11-24T19:15:00" },
     { id: "C. Williams",    label: "Caleb Williams (Bears)", kickoff: null },
     { id: "J. Burrow",      label: "Joe Burrow (Bengals)", kickoff: null },
-    { id: "J. Allen",       label: "Josh Allen (Bills)", kickoff: null },
+    { id: "J. Allen",       label: "Josh Allen (Bills)", kickoff: "2025-11-20T19:20:00" },
     { id: "S. Sanders",     label: "Shedeur Sanders (Browns)", kickoff: null },
     { id: "B. Mayfield",    label: "Baker Mayfield (Buccaneers)", kickoff: null },
     { id: "J. Brissett",    label: "Jacoby Brissett (Cardinals)", kickoff: null },
@@ -40,7 +40,7 @@ const FLASH_QUESTIONS = [
     { id: "T. Taylor",      label: "Tyrod Taylor (Jets)", kickoff: null },
     { id: "J. Goff",        label: "Jared Goff (Lions)", kickoff: null },
     { id: "J. Love",        label: "Jordan Love (Packers)", kickoff: null },
-    { id: "B. Young",       label: "Bryce Young (Panthers)", kickoff: null },
+    { id: "B. Young",       label: "Bryce Young (Panthers)", kickoff: "2025-11-24T19:15:00" },
     { id: "D. Maye",        label: "Drake Maye (Patriots)", kickoff: null },
     { id: "G. Smith",       label: "Geno Smith (Raiders)", kickoff: null },
     { id: "M. Stafford",    label: "Matthew Stafford (Rams)", kickoff: null },
@@ -48,7 +48,7 @@ const FLASH_QUESTIONS = [
     { id: "T. Shough",      label: "Tyler Shough (Saints)", kickoff: null },
     { id: "S. Darnold",     label: "Sam Darnold (Seahawks)", kickoff: null },
     { id: "M. Rudolph",     label: "Mason Rudolph (Steelers)", kickoff: null },
-    { id: "D. Mills",       label: "Davis Mills (Texans)", kickoff: null },
+    { id: "D. Mills",       label: "Davis Mills (Texans)", kickoff: "2025-11-20T19:20:00" },
     { id: "C. Ward",        label: "Cam Ward (Titans)", kickoff: null },
     { id: "J. McCarthy",    label: "J.J. McCarthy (Vikings)", kickoff: null },
     ]
@@ -59,8 +59,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Sí", label: "Sí", kickoff: "2025-11-20T19:20:00" },
+      { id: "No", label: "No", kickoff: "2025-11-20T19:20:00" }
     ]
   },
   {
@@ -69,10 +69,10 @@ const FLASH_QUESTIONS = [
     blockable: true,
     type: "select",
     options: [
-      { id: "B. Purdy",       label: "Brock Purdy (49ers)", kickoff: null },
+      { id: "B. Purdy",       label: "Brock Purdy (49ers)", kickoff: "2025-11-24T19:15:00" },
       { id: "C. Williams",    label: "Caleb Williams (Bears)", kickoff: null },
       { id: "J. Burrow",      label: "Joe Burrow (Bengals)", kickoff: null },
-      { id: "J. Allen",       label: "Josh Allen (Bills)", kickoff: null },
+      { id: "J. Allen",       label: "Josh Allen (Bills)", kickoff: "2025-11-20T19:20:00" },
       { id: "S. Sanders",     label: "Shedeur Sanders (Browns)", kickoff: null },
       { id: "B. Mayfield",    label: "Baker Mayfield (Buccaneers)", kickoff: null },
       { id: "J. Brissett",    label: "Jacoby Brissett (Cardinals)", kickoff: null },
@@ -86,7 +86,7 @@ const FLASH_QUESTIONS = [
       { id: "T. Taylor",      label: "Tyrod Taylor (Jets)", kickoff: null },
       { id: "J. Goff",        label: "Jared Goff (Lions)", kickoff: null },
       { id: "J. Love",        label: "Jordan Love (Packers)", kickoff: null },
-      { id: "B. Young",       label: "Bryce Young (Panthers)", kickoff: null },
+      { id: "B. Young",       label: "Bryce Young (Panthers)", kickoff: "2025-11-24T19:15:00" },
       { id: "D. Maye",        label: "Drake Maye (Patriots)", kickoff: null },
       { id: "G. Smith",       label: "Geno Smith (Raiders)", kickoff: null },
       { id: "M. Stafford",    label: "Matthew Stafford (Rams)", kickoff: null },
@@ -94,7 +94,7 @@ const FLASH_QUESTIONS = [
       { id: "T. Shough",      label: "Tyler Shough (Saints)", kickoff: null },
       { id: "S. Darnold",     label: "Sam Darnold (Seahawks)", kickoff: null },
       { id: "M. Rudolph",     label: "Mason Rudolph (Steelers)", kickoff: null },
-      { id: "D. Mills",       label: "Davis Mills (Texans)", kickoff: null },
+      { id: "D. Mills",       label: "Davis Mills (Texans)", kickoff: "2025-11-20T19:20:00" },
       { id: "C. Ward",        label: "Cam Ward (Titans)", kickoff: null },
       { id: "J. McCarthy",    label: "J.J. McCarthy (Vikings)", kickoff: null },
     ]
@@ -105,10 +105,10 @@ const FLASH_QUESTIONS = [
     blockable: true,
     type: "select",
     options: [
-      { id: "49ers", label: "San Francisco 49ers", kickoff: null },
+      { id: "49ers", label: "San Francisco 49ers", kickoff: "2025-11-24T19:15:00" },
       { id: "Bears", label: "Chicago Bears", kickoff: null },
       { id: "Bengals", label: "Cincinnati Bengals", kickoff: null },
-      { id: "Bills", label: "Buffalo Bills", kickoff: null },
+      { id: "Bills", label: "Buffalo Bills", kickoff: "2025-11-20T19:20:00" },
       { id: "Browns", label: "Cleveland Browns", kickoff: null },
       { id: "Buccaneers", label: "Tampa Bay Buccaneers", kickoff: null },
       { id: "Cardinals", label: "Arizona Cardinals", kickoff: null },
@@ -122,7 +122,7 @@ const FLASH_QUESTIONS = [
       { id: "Jets", label: "New York Jets", kickoff: null },
       { id: "Lions", label: "Detroit Lions", kickoff: null },
       { id: "Packers", label: "Green Bay Packers", kickoff: null },
-      { id: "Panthers", label: "Carolina Panthers", kickoff: null },
+      { id: "Panthers", label: "Carolina Panthers", kickoff: "2025-11-24T19:15:00" },
       { id: "Patriots", label: "New England Patriots", kickoff: null },
       { id: "Raiders", label: "Las Vegas Raiders", kickoff: null },
       { id: "Rams", label: "Los Angeles Rams", kickoff: null },
@@ -130,7 +130,7 @@ const FLASH_QUESTIONS = [
       { id: "Saints", label: "New Orleans Saints", kickoff: null },
       { id: "Seahawks", label: "Seattle Seahawks", kickoff: null },
       { id: "Steelers", label: "Pittsburgh Steelers", kickoff: null },
-      { id: "Texans", label: "Houston Texans", kickoff: null },
+      { id: "Texans", label: "Houston Texans", kickoff: "2025-11-20T19:20:00" },
       { id: "Titans", label: "Tennessee Titans", kickoff: null },
       { id: "Vikings", label: "Minnesota Vikings", kickoff: null }
     ]
