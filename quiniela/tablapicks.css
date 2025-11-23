@@ -1,360 +1,94 @@
-/* =====================================================
-   TABLA DE PICKS – TEMA MODERNO MINIMALISTA DARK
-   (oscuro suave, legible, estilo dashboard)
-   ===================================================== */
+/* =======================================
+   RESULTADOS – TEMA CLARO MODERNO
+   ======================================= */
 
-/* Fondo general de la página de resultados */
-body {
+html, body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: radial-gradient(circle at top, #1f2933 0, #020617 55%, #020617 100%);
-  color: #e5e7eb;
-  background-color: #020617;
+  padding: 0;
+  background: #f3f4f6; /* gris claro */
+  color: #111827;      /* texto gris oscuro */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Wrapper opcional (si lo usas) */
+/* Layout general */
+.results-page.results-wrapper,
 .results-wrapper {
-  padding: 24px 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 32px;
+  box-sizing: border-box;
 }
 
-/* Títulos (si los usas en esta página) */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   TITULOS
+   ========================= */
+
 .results-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: #f9fafb;
-  margin-bottom: 4px;
-  margin-left: 60px;
+  letter-spacing: -0.03em;
+  color: #111827;
+  margin: 4px 0 2px;
 }
 
 .results-subtitle {
-  font-size: 13px;
-  color: #9ca3af;
-  margin-bottom: 16px;
-  margin-left: 60px;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
 }
 
-/* =====================================================
-   TABLA – CARD PRINCIPAL
-===================================================== */
-
-.table {
-  width: 92%;
-  margin: 22px auto 32px auto;
-  border-radius: 18px;
-
-  /* “liquid glass” oscuro suave */
-  background:
-    radial-gradient(circle at top left, rgba(148, 163, 184, 0.16), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.18), transparent 55%),
-    rgba(15, 23, 42, 0.96);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(15, 23, 42, 0.9);
-
-  overflow: visible !important;
-}
-
-.table table {
-  width: 100%;
-  min-width: 1100px;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-/* =====================================================
-   CABECERA DE LA TABLA
-===================================================== */
-
-.table thead th {
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #cbd5f5;
-
-  background:
-    linear-gradient(180deg, rgba(30, 64, 175, 0.8), rgba(15, 23, 42, 0.98));
-  border-bottom: 1px solid rgba(148, 163, 184, 0.55);
-  white-space: nowrap;
-}
-
-/* Borde redondeado en esquinas superiores */
-.table thead th:first-child {
-  border-top-left-radius: 18px;
-}
-.table thead th:last-child {
-  border-top-right-radius: 18px;
-}
-
-/* =====================================================
-   CELDAS GENERALES
-===================================================== */
-
-.table td,
-.table th {
-  padding: 9px 12px;
-  font-size: 13px;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
-}
-
-/* Primera columna – nombre del partido / fila */
-.table td:first-child,
-.table th:first-child {
-  text-align: left;
-  width: 260px;
-  font-weight: 600;
-  color: #e5e9f7;
-  white-space: normal;
-}
-
-/* Fila normal (fondo base) */
-.table tbody tr td:not(.cell-win):not(.cell-lose) {
-  background: rgba(15, 23, 42, 0.9);
-}
-
-/* Zebra muy sutil en filas */
-.table tbody tr:nth-child(even) td:not(.cell-win):not(.cell-lose) {
-  background: rgba(15, 23, 42, 0.96);
-}
-
-/* Hover sobre la fila (sin pisar win/lose) */
-.table tbody tr:hover td:not(.cell-win):not(.cell-lose) {
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.16), rgba(15, 23, 42, 0.98));
-}
-
-/* Última fila borde redondeado inferior */
-.table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 18px;
-}
-.table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 18px;
-}
-
-/* =====================================================
-   PARTIDOS / LABELS
-===================================================== */
-
-.game-label-cell {
-  font-weight: 600;
-  color: #e5e7eb;
-}
-
-/* Jugadores en header */
-.player-name {
-  display: block;
-  max-width: 140px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 600;
-  color: #e5e9f7;
-}
-
-/* =====================================================
-   PUNTOS
-===================================================== */
-
-.points-cell {
-  text-align: center;
-  font-weight: 800;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
-  color: #e5e7eb;
-}
-
-/* líder general */
-.points-leader{
-  position: relative;
-  background:
-    radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.35), transparent 65%),
-    linear-gradient(180deg, rgba(22, 163, 74, 0.95), rgba(5, 46, 22, 0.98));
-  color:#f5ffec;
-  border: 2px solid rgba(250, 204, 21, 0.9);           /* borde dorado */
-  box-shadow:
-    0 0 0 1px rgba(15, 23, 42, 0.9),
-    0 0 14px rgba(250, 204, 21, 0.55);                /* glow suave */
-  border-radius: 8px;
-}
-
-/* =====================================================
-   ESTADO DE CELDAS (WIN / LOSE / VACÍO)
-===================================================== */
-
-/* Acierto */
-.cell-win {
-  background: rgba(0, 185, 94, 0.18);
-  color: #c6ffdf;
-  border-left: 3px solid #00b95e;
-  font-weight: 600;
-}
-
-.cell-lose {
-  background: rgba(220, 53, 69, 0.18);
-  color: #ffd4d4;
-  border-left: 3px solid #dc3545;
-  font-weight: 600;
-}
-
-.cell-empty {
-  background: rgba(255,255,255,0.03);
-  color: #9aa6b7;
-}
-
-/* Tiene pick pero sin verificación de ganador (no hay winner de ESPN) */
-.cell-has-pick {
-  color: #e5e7eb;
-}
-
-/* =====================================================
-   LEYENDA (SI LA USAS)
-===================================================== */
+/* =========================
+   LEYENDA (badges)
+   ========================= */
 
 .results-legend {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 12px 0 6px;
+  margin: 10px 0 10px;
   font-size: 12px;
-  margin-left: 60px;
 }
 
 .badge {
   padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  background: rgba(15, 23, 42, 0.85);
-  color: #e5e7eb;
-}
-
-/* win */
-.badge-win {
-  border-color: rgba(74, 222, 128, 0.7);
-  background: rgba(5, 46, 22, 0.95);
-  color: #bbf7d0;
-}
-
-/* lose */
-.badge-lose {
-  border-color: rgba(248, 113, 113, 0.85);
-  background: rgba(69, 10, 10, 0.95);
-  color: #fecaca;
-}
-
-/* vacío */
-.badge-empty {
-  border-color: rgba(148, 163, 184, 0.7);
-  color: #cbd5f5;
-}
-
-/* =====================================================
-   CHIPS ADMIN (panel extra)
-===================================================== */
-
-.admin-chip {
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: rgba(15, 23, 42, 0.9);
-  color: #e5e7eb;
-  font-size: 11px;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
-}
-.admin-chip:hover {
-  background: rgba(30, 64, 175, 0.75);
-  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.7);
-  transform: translateY(-1px);
-}
-
-.admin-chip-active {
-    
-}
-
-.admin-chip-lose-active {
-  background: linear-gradient(
-      135deg,
-      rgba(220, 38, 38, 0.85),
-      rgba(69, 10, 10, 0.95)
-  );
-  border-color: rgba(248, 113, 113, 0.6);
-  color: #fee2e2;
-  box-shadow: 0 0 0 1px rgba(248,113,113,0.5),
-              0 3px 10px rgba(220,38,38,0.4);
-}
-
-.admin-chip-win-active {
-  background: linear-gradient(
-      135deg,
-      rgba(22, 163, 74, 0.85),
-      rgba(5, 46, 22, 0.95)
-  );
-  border-color: rgba(74, 222, 128, 0.6);
-  color: #d1fae5;
-  box-shadow: 0 0 0 1px rgba(74,222,128,0.45),
-              0 3px 10px rgba(22,163,74,0.4);
-}   
-
-/* =====================================================
-   BOTONES (PNG + toggle panel)
-===================================================== */
-
-#btnDownloadPng,
-#admin-panel-toggle {
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.75);
-  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.32), rgba(15, 23, 42, 0.98));
-  color: #e5e9f7;
-  font-size: 12px;
-  cursor: pointer;
-  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.7);
-  transition: 0.15s ease;
-  margin-left: 60px;
-}
-#btnDownloadPng:hover,
-#admin-panel-toggle:hover {
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.55), rgba(15, 23, 42, 0.98));
-  transform: translateY(-1px);
-}
-#btnDownloadPng:active,
-#admin-panel-toggle:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.8);
-}
-
-.player-header {
-  display: flex;
-  flex-direction: column;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: #ffffff;
+  color: #374151;
+  display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
-.player-name {
-  font-weight: 600;
+.badge-win {
+  border-color: #4ade80;
+  background: #ecfdf3;
+  color: #166534;
 }
 
-.player-rank {
-  font-size: 11px;
-  opacity: 0.7;
+.badge-lose {
+  border-color: #f97373;
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
-/* Cuando sólo hay un jugador, que esa columna quede centrada */
-.single-player-table th:nth-child(2),
-.single-player-table td:nth-child(2) {
-  text-align: center;
-}
-.single-player-table td:first-child,
-.single-player-table th:first-child {
-  text-align: left;
+.badge-empty {
+  border-color: #d1d5db;
+  background: #f9fafb;
+  color: #6b7280;
 }
 
-/* ================================
-   BOTONES — MISMO ESTILO QUE FLASH
-   ================================ */
+/* =========================
+   BOTONES
+   ========================= */
 
 .btn {
   display: inline-flex;
@@ -362,35 +96,308 @@ body {
   justify-content: center;
   padding: 6px 16px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(30, 41, 59, 0.65);
-  color: #e2e8f0;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  transition: background .2s ease, box-shadow .2s ease, transform .15s ease;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  box-shadow: 0 2px 6px rgba(148, 163, 184, 0.35);
+  transition: background .18s ease, box-shadow .18s ease, transform .12s ease;
 }
 
 .btn:hover {
-  background: rgba(51, 65, 85, 0.8);
-  box-shadow: 0 0 12px rgba(148, 163, 184, 0.25);
+  background: #e5e7eb;
+  box-shadow: 0 3px 8px rgba(148, 163, 184, 0.45);
   transform: translateY(-1px);
 }
 
 .btn:active {
-  transform: translateY(0px) scale(.97);
-  box-shadow: 0 0 8px rgba(148,163,184,.18);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 1px 4px rgba(148, 163, 184, 0.25);
 }
 
-/* variante secondary (gris suave) */
 .btn.secondary {
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: #f3f4f6;
 }
 
 .btn.secondary:hover {
-  background: rgba(30, 41, 59, 0.85);
+  background: #e5e7eb;
+}
+
+/* botón PNG si usas id */
+#btnDownloadPng {
+  margin-bottom: 8px;
+}
+
+/* =========================
+   CONTENEDOR TABLA (glass)
+   ========================= */
+
+.table {
+  margin-top: 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  box-shadow:
+    0 12px 32px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+  overflow-x: auto;
+  padding: 8px;
+}
+
+/* =========================
+   TABLA
+   ========================= */
+
+.table table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th,
+.table td {
+  padding: 8px 10px;
+  font-size: 13px;
+  border-bottom: 1px solid #cbccce;
+  text-align: center;
+}
+
+.table th:first-child,
+.table td:first-child {
+  text-align: left;
+}
+
+.table thead th {
+  background: rgba(236, 239, 242, 0.95);
+  color: #111827;
+  font-weight: 600;
+}
+
+.table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+.table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* filas zebra ligeras (sólo en celdas "normales") */
+.table tbody tr:nth-child(even) td:not(.cell-win):not(.cell-lose):not(.points-cell) {
+  background: rgba(249, 250, 251, 0.9);
+}
+.table tbody tr:nth-child(odd) td:not(.cell-win):not(.cell-lose):not(.points-cell) {
+  background: rgba(255, 255, 255, 1);
+}
+
+.table tbody tr:hover td {
+  background: #e5f0ff;
+}
+
+/* =========================
+   NOMBRES / PARTIDOS
+   ========================= */
+
+.game-label-cell {
+  font-weight: 600;
+  color: #111827;
+}
+
+.player-name {
+  display: block;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* si usas .player-header / .player-rank */
+.player-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.player-rank {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* =========================
+   PUNTOS
+   ========================= */
+
+.points-cell {
+  text-align: center;
+  font-weight: 800;
+  background: #eef2ff;
+  color: #1e293b;
+}
+
+.points-leader {
+  background: linear-gradient(135deg, #fef9c3, #fffbeb);
+  color: #854d0e;
+  border: 1px solid rgba(234, 179, 8, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4);
+}
+
+/* resaltar toda la columna del líder */
+.leader-col {
+  background: linear-gradient(180deg, rgba(254, 249, 195, 0.65), rgba(255, 251, 235, 0.95));
+}
+
+/* =========================
+   ESTADO DE CELDAS
+   ========================= */
+
+/* Acierto (verde claro, no fosfo, estilo glass light) */
+.cell-win {
+  background: radial-gradient(circle at top left,
+              rgba(34, 197, 94, 0.22),
+              rgba(240, 253, 244, 1));
+  border-radius: 8px;
+  border: 1px solid rgba(34, 197, 94, 0.6);
+  color: #14532d;
+  font-weight: 700;
+}
+
+/* Error (rojo claro, glass) */
+.cell-lose {
+  background: radial-gradient(circle at top left,
+              rgba(248, 113, 113, 0.22),
+              rgba(254, 242, 242, 1));
+  border-radius: 8px;
+  border: 1px solid rgba(248, 113, 113, 0.6);
+  color: #7f1d1d;
+  font-weight: 700;
+}
+
+/* Sin marcador */
+.cell-empty {
+  background: rgba(249, 250, 251, 1);
+  color: #9ca3af;
+  border-radius: 6px;
+}
+
+/* Tiene pick pero sin info de ganador (neutro, sin morado) */
+.cell-has-pick {
+  background: rgba(229, 231, 235, 1);
+  color: #111827;
+  border-radius: 6px;
+}
+
+/* =========================
+   MODO UN SOLO JUGADOR
+   ========================= */
+
+.single-player-table {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.single-player-table th:nth-child(2),
+.single-player-table td:nth-child(2) {
+  text-align: center;
+}
+
+/* =========================
+   ADMIN PANEL (EXTRAS)
+   ========================= */
+
+.admin-card {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(209, 213, 219, 0.9);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.admin-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.admin-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin: 10px 0 4px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 4px 6px;
+  font-size: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+/* chips de ganador/perdedor */
+.admin-chip {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(156, 163, 175, 0.8);
+  background: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #4b5563;
+  transition: background .15s ease, box-shadow .15s ease, transform .1s ease;
+}
+
+.admin-chip:hover {
+  background: #e5e7eb;
+}
+
+.admin-chip-win-active {
+  background: #dcfce7;
+  border-color: #16a34a;
+  color: #166534;
+}
+
+.admin-chip-lose-active {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #7f1d1d;
+}
+
+#admin-extras-msg {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #16a34a;
+}
+
+/* =========================
+   UTILIDADES
+   ========================= */
+
+.muted {
+  color: #9ca3af;
+}
+
+body {
+  overflow-x: hidden;
 }
