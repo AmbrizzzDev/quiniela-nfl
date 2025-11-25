@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1-qb-int",          label: "Quarterback más interceptado" },
-  { id: "q2-safety",          label: "¿Habrá Safety?" },
-  { id: "q3-qb-sacks",          label: "Quarterback con más sacks" },
-  { id: "q4-team-flags",          label: "Equipo con más flags" }
+  { id: "q1",          label: "----" },
+  { id: "q2",          label: "----" },
+  { id: "q3",          label: "----" },
+  { id: "q4",          label: "----" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
