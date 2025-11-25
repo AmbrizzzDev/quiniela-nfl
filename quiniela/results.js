@@ -359,9 +359,16 @@ async function saveExtrasMetaFromPanel(players) {
 
 async function fetchEventsFromEspn() {
   console.log("🏈 Llamando scoreboard ESPN...");
+
+  // Construimos la URL con la semana actual de app-config (si existe)
+  let url = SCOREBOARD_BASE_URL;
+  if (typeof CURRENT_WEEK !== "undefined") {
+    url += `?week=${CURRENT_WEEK}`;
+  }
+
   let resp;
   try {
-    resp = await fetch(SCOREBOARD_URL);
+    resp = await fetch(url);
   } catch (e) {
     console.warn(
       "⚠️ No se pudo llamar ESPN (posible CORS). Continuamos sin colores.",
@@ -369,12 +376,29 @@ async function fetchEventsFromEspn() {
     );
     return [];
   }
+
   if (!resp.ok) {
     console.warn("⚠️ Respuesta no OK de ESPN:", resp.status);
     return [];
   }
 
   const data = await resp.json();
+
+  // ✅ Verificamos que la semana de ESPN coincide con CURRENT_WEEK
+  const apiWeek = data && data.week && data.week.number;
+  if (
+    typeof CURRENT_WEEK !== "undefined" &&
+    apiWeek != null &&
+    Number(apiWeek) !== Number(CURRENT_WEEK)
+  ) {
+    console.warn(
+      `⚠️ La semana del scoreboard ESPN (${apiWeek}) no coincide con CURRENT_WEEK (${CURRENT_WEEK}). No se pintarán ganadores.`
+    );
+    // Devolvemos lista vacía → no habrá colores ni puntos automáticos,
+    // solo se verán los picks en gris.
+    return [];
+  }
+
   const events = [];
 
   (data.events || []).forEach((ev) => {
@@ -398,8 +422,8 @@ async function fetchEventsFromEspn() {
         teamName:
           winnerComp.team.shortDisplayName || winnerComp.team.displayName,
         abbrev: winnerComp.team.abbreviation,
-        fullName: winnerComp.team.displayName
-      }
+        fullName: winnerComp.team.displayName,
+      },
     });
   });
 
