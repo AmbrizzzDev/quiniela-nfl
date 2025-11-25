@@ -1,7 +1,7 @@
 // results.js – Tabla de resultados + jugada especial + flash
 // Requiere EVENT_ID, CURRENT_WEEK y FIREBASE_CONFIG / firebaseConfig
 
-const SCOREBOARD_URL =
+const SCOREBOARD_BASE_URL =
   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
 
 // --- Admin por URL ---
