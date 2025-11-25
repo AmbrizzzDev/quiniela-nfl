@@ -1,19 +1,21 @@
 //* Lista de juegos
 const GAMES = [
-  { id: "Texans vs Bills", home: "Texans", away: "Bills" },
-  { id: "Bears vs Steelers", home: "Bears", away: "Steelers" },
-  { id: "Bengals vs Patriots", home: "Bengals", away: "Patriots" },
-  { id: "Lions vs Giants", home: "Lions", away: "Giants" },
-  { id: "Packers vs Vikings", home: "Packers", away: "Vikings" },
-  { id: "Titans vs Seahawks", home: "Titans", away: "Seahawks" },
-  { id: "Chiefs vs Colts", home: "Chiefs", away: "Colts" },
-  { id: "Ravens vs Jets", home: "Ravens", away: "Jets" },
-  { id: "Raiders vs Browns", home: "Raiders", away: "Browns" },
-  { id: "Cardinals vs Jaguars", home: "Cardinals", away: "Jaguars" },
-  { id: "Cowboys vs Eagles", home: "Cowboys", away: "Eagles" },
-  { id: "Saints vs Falcons", home: "Saints", away: "Falcons" },
-  { id: "Rams vs Buccaneers", home: "Rams", away: "Buccaneers" },
-  { id: "49ers vs Panthers", home: "49ers", away: "Panthers" }
+  { id: "Lions vs Packers", home: "Lions", away: "Packers" },
+  { id: "Cowboys vs Chiefs", home: "Cowboys", away: "Chiefs" },
+  { id: "Ravens vs Bengals", home: "Ravens", away: "Bengals" },
+  { id: "Eagles vs Bears", home: "Eagles", away: "Bears" },
+  { id: "Browns vs 49ers", home: "Packers", away: "Vikings" },
+  { id: "Titans vs Jaguars", home: "Titans", away: "Jaguars" },
+  { id: "Colts vs Texans", home: "Colts", away: "Texans" },
+  { id: "Dolphins vs Saints", home: "Dolphins", away: "Saints" },
+  { id: "Jets vs Falcons", home: "Jets", away: "Falcons" },
+  { id: "Buccaneers vs Cardinals", home: "Buccaneers", away: "Cardinals" },
+  { id: "Panthers vs Rams", home: "Panthers", away: "Rams" },
+  { id: "Seahawks vs Vikings", home: "Seahawks", away: "Vikings" },
+  { id: "Steelers vs Bills", home: "Steelers", away: "Bills" },
+  { id: "Chargers vs Raiders", home: "Chargers", away: "Raiders" },
+  { id: "Commanders vs Broncos", home: "Commanders", away: "Broncos" },
+  { id: "Patriots vs Giants", home: "Patriots", away: "Giants" },
 ];
 
 //! Logos de equipos
