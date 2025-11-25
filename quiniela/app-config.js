@@ -1,6 +1,6 @@
 //! Conexion a la base de datos de Firebase
 const EVENT_ID   = "quiniela-2025";
-const CURRENT_WEEK = 12;
+const CURRENT_WEEK = 13;
 const DEADLINE   = new Date("2025-11-27T19:16:00");
 
 // Solo si la página cargó Firebase SDK, inicializamos:
