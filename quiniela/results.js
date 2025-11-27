@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "----" },
-  { id: "q2",          label: "----" },
-  { id: "q3",          label: "----" },
-  { id: "q4",          label: "----" }
+  { id: "q1",          label: "🏥 Jugador lesionado" },
+  { id: "q2",          label: "⚔️ Gol de campo +50yds" },
+  { id: "q3",          label: "🏈 QB con más TD" },
+  { id: "q4",          label: "🚥 QB más % de pases completos" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
