@@ -11,7 +11,7 @@ const GAMES = [
   { id: "Ravens  vs Steelers", home: "Ravens", away: "Steelers" },
   { id: "Raiders vs Broncos", home: "Raiders", away: "Broncos" },
   { id: "Packers vs Bears", home: "Packers", away: "Bears" },
-  { id: "Cardinals vs Rams", home: "Seahawks", away: "Vikings" },
+  { id: "Cardinals vs Rams", home: "Cardinals", away: "Rams" },
   { id: "Chiefs vs Texans", home: "Chiefs", away: "Texans" },
   { id: "Chargers vs Eagles", home: "Chargers", away: "Eagles" }, 
 ];
