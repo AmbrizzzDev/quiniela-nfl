@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "4 & down" },
-  { id: "q2",          label: "Equipo Eliminado" },
-  { id: "q3",          label: "Equipo +40 Puntos" },
-  { id: "q4",          label: "FG Fallado -40yds" }
+  { id: "q1",          label: "🛡️ 4 & down" },
+  { id: "q2",          label: "⛔ Equipo Eliminado" },
+  { id: "q3",          label: "➕ Equipo +40 Puntos" },
+  { id: "q4",          label: "➖ FG Fallado -40yds" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
