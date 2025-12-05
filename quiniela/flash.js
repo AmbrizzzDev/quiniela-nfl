@@ -34,13 +34,13 @@ const FLASH_QUESTIONS = [
       { id: "Cowboys", label: "Kansas City Chiefs", kickoff: null },
       { id: "Colts", label: "Indianapolis Colts", kickoff: null },
       { id: "Commanders", label: "Washington Commanders", kickoff: null },
-      { id: "Dallas", label: "Dallas Cowboys", kickoff: null },
+      { id: "Dallas", label: "Dallas Cowboys", kickoff: "2025-12-04T19:20:00Z" },
       { id: "Dolphins", label: "Miami Dolphins", kickoff: null },
       { id: "Eagles", label: "Philadelphia Eagles", kickoff: null },
       { id: "Falcons", label: "Atlanta Falcons", kickoff: null },
       { id: "Jaguars", label: "Jacksonville Jaguars", kickoff: null },
       { id: "Jets", label: "New York Jets", kickoff: null },
-      { id: "Lions", label: "Detroit Lions", kickoff: null },
+      { id: "Lions", label: "Detroit Lions", kickoff: "2025-12-04T19:20:00Z" },
       { id: "Packers", label: "Green Bay Packers", kickoff: null },
       { id: "Raiders", label: "Las Vegas Raiders", kickoff: null },
       { id: "Rams", label: "Los Angeles Rams", kickoff: null },
@@ -72,8 +72,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-04T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-04T19:20:00Z" }
     ]
   },
   {
@@ -82,8 +82,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-04T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-04T19:20:00Z" }
     ]
   }
 ];
