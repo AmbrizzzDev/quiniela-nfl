@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "----" },
-  { id: "q2",          label: "----" },
-  { id: "q3",          label: "----" },
-  { id: "q4",          label: "----" }
+  { id: "q1",          label: "🏈 Jugador 3+ TD un partido" },
+  { id: "q2",          label: "🧊 Equipo blanqueado al medio tiempo" },
+  { id: "q3",          label: "🔥 Fumble por un QB" },
+  { id: "q4",          label: "⏱️ Algún partido diferencia de 3 +/-" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
