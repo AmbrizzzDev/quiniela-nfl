@@ -23,8 +23,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   },
   {
@@ -33,8 +33,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   },
   {
@@ -43,8 +43,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   },
   {
@@ -53,8 +53,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: null },
+      { id: "No", label: "No", kickoff: null }
     ]
   }
 ];
