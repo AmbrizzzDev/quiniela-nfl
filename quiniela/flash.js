@@ -19,71 +19,42 @@ function _parseKickoff(v){
 const FLASH_QUESTIONS = [
   {
     id: "q1",
-    text: "¿Cuál equipo tendra más conversiones de 4 & down",
-    blockable: true,
+    text: "¿Habrá un jugador con 3+ touchdowns totales en un partido?",
+    blockable: false,
     type: "select",
     options: [
-      { id: "Bears", label: "Chicago Bears", kickoff: null },
-      { id: "Bengals", label: "Cincinnati Bengals", kickoff: null },
-      { id: "Bills", label: "Buffalo Bills", kickoff: null },
-      { id: "Broncos", label: "Denver Broncos", kickoff: null },
-      { id: "Browns", label: "Cleveland Browns", kickoff: null },
-      { id: "Buccaneers", label: "Tampa Bay Buccaneers", kickoff: null },
-      { id: "Cardinals", label: "Arizona Cardinals", kickoff: null },
-      { id: "Chargers", label: "Los Angeles Chargers", kickoff: null },
-      { id: "Cowboys", label: "Kansas City Chiefs", kickoff: null },
-      { id: "Colts", label: "Indianapolis Colts", kickoff: null },
-      { id: "Commanders", label: "Washington Commanders", kickoff: null },
-      { id: "Dallas", label: "Dallas Cowboys", kickoff: "2025-12-04T19:20:00Z" },
-      { id: "Dolphins", label: "Miami Dolphins", kickoff: null },
-      { id: "Eagles", label: "Philadelphia Eagles", kickoff: null },
-      { id: "Falcons", label: "Atlanta Falcons", kickoff: null },
-      { id: "Jaguars", label: "Jacksonville Jaguars", kickoff: null },
-      { id: "Jets", label: "New York Jets", kickoff: null },
-      { id: "Lions", label: "Detroit Lions", kickoff: "2025-12-04T19:20:00Z" },
-      { id: "Packers", label: "Green Bay Packers", kickoff: null },
-      { id: "Raiders", label: "Las Vegas Raiders", kickoff: null },
-      { id: "Rams", label: "Los Angeles Rams", kickoff: null },
-      { id: "Ravens", label: "Baltimore Ravens", kickoff: null },
-      { id: "Saints", label: "New Orleans Saints", kickoff: null },
-      { id: "Seahawks", label: "Seattle Seahawks", kickoff: null },
-      { id: "Steelers", label: "Pittsburgh Steelers", kickoff: null },
-      { id: "Texans", label: "Houston Texans", kickoff: null },
-      { id: "Titans", label: "Tennessee Titans", kickoff: null },
-      { id: "Vikings", label: "Minnesota Vikings", kickoff: null }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
     ]
   },
   {
     id: "q2",
-    text: "¿Cuál sera el siguiente equipo eliminado?",
+    text: "¿Algún equipo se irá al medio tiempo sin anotar puntos?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Browns", label: "Cleveland Browns", kickoff: null },
-      { id: "Jets", label: "New York Jets", kickoff: null },
-      { id: "Falcons", label: "Atlanta Falcons", kickoff: null },
-      { id: "Commanders", label: "Washington Commanders", kickoff: null },
-      { id: "Vikings", label: "Minnesota Vikings", kickoff: null }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
     ]
   },
   {
     id: "q3",
-    text: "¿Habrá algun equipo que anote 40 puntos o más?",
+    text: "¿Habrá un fumble por un QB?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-04T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-04T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
     ]
   },
   {
     id: "q4",
-    text: "Habrá al menos un gol de campo fallado dentro de las 40 yardas",
+    text: "¿Se decidirá algún partido por 3 puntos o menos?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: "2025-12-04T19:20:00Z" },
-      { id: "No", label: "No", kickoff: "2025-12-04T19:20:00Z" }
+      { id: "Sí", label: "Sí", kickoff: "2025-12-18T19:20:00Z" },
+      { id: "No", label: "No", kickoff: "2025-12-18T19:20:00Z" }
     ]
   }
 ];
