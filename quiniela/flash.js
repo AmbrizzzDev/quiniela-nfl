@@ -19,7 +19,7 @@ function _parseKickoff(v){
 const FLASH_QUESTIONS = [
   {
     id: "q1",
-    text: "¿Habrá un jugador con 3+ touchdowns totales en un partido?",
+    text: "¿Habrá un TD de equipos especiales?",
     blockable: false,
     type: "select",
     options: [
@@ -29,7 +29,7 @@ const FLASH_QUESTIONS = [
   },
   {
     id: "q2",
-    text: "¿Algún equipo se irá al medio tiempo sin anotar puntos?",
+    text: "¿Algún equipo se quedará por debajo de 10 puntos?",
     blockable: false,
     type: "select",
     options: [
@@ -39,7 +39,7 @@ const FLASH_QUESTIONS = [
   },
   {
     id: "q3",
-    text: "¿Habrá un fumble por un QB?",
+    text: "¿Expulsarán a algún jugador?",
     blockable: false,
     type: "select",
     options: [
@@ -49,7 +49,7 @@ const FLASH_QUESTIONS = [
   },
   {
     id: "q4",
-    text: "¿Se decidirá algún partido por 3 puntos o menos?",
+    text: "¿Habrá un TD en los ultimos 2 minutos de la 2da mitad?",
     blockable: false,
     type: "select",
     options: [

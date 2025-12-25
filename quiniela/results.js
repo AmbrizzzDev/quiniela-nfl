@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "🏈 Jugador 3+ TD un partido" },
-  { id: "q2",          label: "🧊 Equipo blanqueado al medio tiempo" },
-  { id: "q3",          label: "🔥 Fumble por un QB" },
-  { id: "q4",          label: "⏱️ Algún partido diferencia de 3 =/-" }
+  { id: "q1",          label: "🏈 TD equipos especiales" },
+  { id: "q2",          label: "🧊 Equipo debajo de 10 puntos" },
+  { id: "q3",          label: "🥊 Expulsión de algún jugador" },
+  { id: "q4",          label: "⏱️ TD ultimos 2 min de la 2da mitad" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
