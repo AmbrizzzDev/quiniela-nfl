@@ -16,10 +16,10 @@ function isResultsAdminFromUrl() {
 
 // Preguntas flash que se mostrarán en el panel y en la tabla
 const FLASH_ADMIN_QUESTIONS = [
-  { id: "q1",          label: "🏈 TD equipos especiales" },
-  { id: "q2",          label: "🧊 Equipo debajo de 10 puntos" },
-  { id: "q3",          label: "🥊 Expulsión de algún jugador" },
-  { id: "q4",          label: "⏱️ TD ultimos 2 min de la 2da mitad" }
+  { id: "q1",          label: "🎫🔺 Ultimo boleto AFC" },
+  { id: "q2",          label: "🎫🔹 Ultimo boleto NFC" },
+  { id: "q3",          label: "1️⃣🔺 Sembrado #1 AFC" },
+  { id: "q4",          label: "🏆 Ganador MVP" }
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
