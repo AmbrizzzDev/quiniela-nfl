@@ -19,42 +19,43 @@ function _parseKickoff(v){
 const FLASH_QUESTIONS = [
   {
     id: "q1",
-    text: "¿Habrá un TD de equipos especiales?",
+    text: "¿Quién obtendra el ultimo boleto para los playoffs de la AFC?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Ravens", label: "Ravens", kickoff: null },
+      { id: "Steelers", label: "Steelers", kickoff: null }
     ]
   },
   {
     id: "q2",
-    text: "¿Algún equipo se quedará por debajo de 10 puntos?",
+    text: "¿Quién obtendra el ultimo boleto para los playoffs de la NFC?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Buccaneers", label: "Buccaneers", kickoff: null },
+      { id: "Panthers", label: "Panthers", kickoff: null }
     ]
   },
   {
     id: "q3",
-    text: "¿Expulsarán a algún jugador?",
+    text: "¿Quién obtendra el sembrado #1 de la AFC?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "Broncos", label: "Broncos", kickoff: null },
+      { id: "Jaguars", label: "Jaguars", kickoff: null },
+      { id: "Patriots", label: "Patriots", kickoff: null }
     ]
   },
   {
     id: "q4",
-    text: "¿Habrá un TD en los ultimos 2 minutos de la 2da mitad?",
+    text: "¿Quién ganara el MVP?",
     blockable: false,
     type: "select",
     options: [
-      { id: "Sí", label: "Sí", kickoff: null },
-      { id: "No", label: "No", kickoff: null }
+      { id: "D. Maye", label: "Drake Maye (Patriots)", kickoff: null },
+      { id: "M. Stafford", label: "Matthew Stafford (Rams)", kickoff: null }
     ]
   }
 ];
