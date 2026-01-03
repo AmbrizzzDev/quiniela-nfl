@@ -23,8 +23,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Ravens", label: "Ravens", kickoff: null },
-      { id: "Steelers", label: "Steelers", kickoff: null }
+      { id: "Ravens", label: "Ravens", kickoff: "2026-01-03T15:35:00" },
+      { id: "Steelers", label: "Steelers", kickoff: "2026-01-03T15:35:00" }
     ]
   },
   {
@@ -33,8 +33,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Buccaneers", label: "Buccaneers", kickoff: null },
-      { id: "Panthers", label: "Panthers", kickoff: null }
+      { id: "Buccaneers", label: "Buccaneers", kickoff: "2026-01-03T15:35:00" },
+      { id: "Panthers", label: "Panthers", kickoff: "2026-01-03T15:35:00" }
     ]
   },
   {
@@ -43,9 +43,9 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "Broncos", label: "Broncos", kickoff: null },
-      { id: "Jaguars", label: "Jaguars", kickoff: null },
-      { id: "Patriots", label: "Patriots", kickoff: null }
+      { id: "Broncos", label: "Broncos", kickoff: "2026-01-03T15:35:00" },
+      { id: "Jaguars", label: "Jaguars", kickoff: "2026-01-03T15:35:00" },
+      { id: "Patriots", label: "Patriots", kickoff: "2026-01-03T15:35:00" }
     ]
   },
   {
@@ -54,8 +54,8 @@ const FLASH_QUESTIONS = [
     blockable: false,
     type: "select",
     options: [
-      { id: "D. Maye", label: "Drake Maye (Patriots)", kickoff: null },
-      { id: "M. Stafford", label: "Matthew Stafford (Rams)", kickoff: null }
+      { id: "D. Maye", label: "Drake Maye (Patriots)", kickoff: "2026-01-03T15:35:00" },
+      { id: "M. Stafford", label: "Matthew Stafford (Rams)", kickoff: "2026-01-03T15:35:00" }
     ]
   }
 ];
